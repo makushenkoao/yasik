@@ -4,5 +4,9 @@ export interface RootParamList {
   Movie: undefined;
   Todo: undefined;
   Profile: undefined;
+  Settings: undefined;
+  Support: undefined;
+  Account: undefined;
+  Header: undefined;
   [key: string]: any;
 }

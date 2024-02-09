@@ -8,7 +8,7 @@ export const $api = axios.create({
 
 $api.interceptors.request.use(config => {
   if (config.headers) {
-    config.headers.Authorization = '';
+    config.headers.Authorization = 'Authorization';
   }
   return config;
 });

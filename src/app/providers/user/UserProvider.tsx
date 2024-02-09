@@ -8,13 +8,12 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface User {
-  createdAt: string;
-  updatedAt: string;
   firstName: string;
   lastName: string;
   nickname: string;
+  email: string;
   id: string;
-  age: number;
+  password: string;
 }
 
 interface ContextType {

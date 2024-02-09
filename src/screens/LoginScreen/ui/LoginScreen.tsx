@@ -34,6 +34,7 @@ export const LoginScreen = () => {
     }
   };
 
+  // TODO: fix login in iPhone
   const onLogin = async (data: LoginData) => {
     try {
       const response = await $api.post('/login', data);

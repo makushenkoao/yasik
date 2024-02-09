@@ -3,8 +3,8 @@ import {Colors} from '@shared/const/colors.ts';
 
 export default StyleSheet.create({
   image: {
-    width: 300,
-    height: 300,
+    width: '100%',
+    height: 400,
   },
   wrapper: {
     alignItems: 'center',
@@ -13,8 +13,8 @@ export default StyleSheet.create({
     overflow: 'hidden',
   },
   textContainer: {
-    width: 300,
-    height: 300,
+    width: '100%',
+    height: 400,
     justifyContent: 'center',
     alignItems: 'center',
   },

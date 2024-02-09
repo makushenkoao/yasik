@@ -1,68 +1,29 @@
-import React from 'react';
+import {Header} from '@widgets/Header';
+import {ScrollView, Text, View} from 'react-native';
 import {Container} from '@shared/ui/Container';
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import {Screen} from '@widgets/Screen/ui/Screen.tsx';
+import {Button} from '@shared/ui/Button';
 import {Colors} from '@shared/const/colors.ts';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {RootParamList} from '@shared/types/router.ts';
 
-// settings - delele account/update account/logout/reset app
-// account - movie bookmarks/info/update account
+export const ProfileScreen = () => {
+  const onLeaveFromApp = () => {};
 
-interface ProfileScreenProps {
-  navigation: StackNavigationProp<RootParamList, 'Profile'>;
-}
-
-export const ProfileScreen = (props: ProfileScreenProps) => {
-  const {navigation} = props;
-
-  const onNavigate = (link: string) => {
-    navigation.navigate(link);
-  };
+  const onDeleteAccount = () => {};
 
   return (
-    <ScrollView>
-      <Container>
-        <View>
-          <TouchableOpacity
-            style={styles.block}
-            activeOpacity={0.7}
-            onPress={() => onNavigate('Account')}>
-            <Text style={styles.text}>Account</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.block}
-            activeOpacity={0.7}
-            onPress={() => onNavigate('Settings')}>
-            <Text style={styles.text}>Settings</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.block}
-            activeOpacity={0.7}
-            onPress={() => onNavigate('About')}>
-            <Text style={styles.text}>About</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.block}
-            activeOpacity={0.7}
-            onPress={() => onNavigate('Support')}>
-            <Text style={styles.text}>Support</Text>
-          </TouchableOpacity>
+    <Screen headerVariant="profile">
+      <Container style={{marginTop: 140, marginBottom: 40}}>
+        <View style={{height: '100%', justifyContent: 'space-between'}}>
+          <Text style={{textAlign: 'center', fontSize: 20, color: Colors.TEXT}}>
+            Your Name
+          </Text>
+          <View>
+            <Button onPress={onLeaveFromApp} content="Leave From App" />
+            <Button onPress={onDeleteAccount} content="Delete Account" />
+          </View>
         </View>
       </Container>
-    </ScrollView>
+    </Screen>
   );
 };
-
-const styles = StyleSheet.create({
-  block: {padding: 20, borderBottomWidth: 1, borderColor: Colors.BORDER},
-  text: {
-    color: Colors.TEXT,
-    fontSize: 16,
-  },
-});

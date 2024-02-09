@@ -13,6 +13,7 @@ import {Button} from '@shared/ui/Button';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '@shared/types/router.ts';
 import {Emoji} from '@shared/ui/Emoji';
+import {Header} from '@widgets/Header';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootParamList, 'Home'>;
@@ -26,26 +27,35 @@ export const HomeScreen = (props: HomeScreenProps) => {
   };
 
   return (
-    <ScrollView>
-      <Container>
-        <Emoji text="Stop bothering me! 😠" />
-        <View style={{marginTop: 40}}>
-          <Button
-            style={{width: '100%'}}
-            content="Goal Checklist ✍️"
-            onPress={() => onNavigate('Todo')}
-          />
-          <Button
-            style={{width: '100%'}}
-            content="Boredom Buster ⚡"
-            onPress={() => console.log('TODO')}
-          />
-          <Button
-            style={{width: '100%'}}
-            content="Choose a Movie 🎥"
-            onPress={() => console.log('TODO')}
-          />
-        </View>
+    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+      <Header variant="home" />
+      <View>
+        <Emoji text="Let's choose what to watch already 🔮" />
+      </View>
+      <Container
+        style={{
+          marginVertical: 50,
+        }}>
+        <Button
+          style={{width: '100%'}}
+          content="Creare session 🎥"
+          onPress={() => onNavigate('Todo')}
+        />
+        <Button
+          style={{width: '100%'}}
+          content="Connect to Session 🤝"
+          onPress={() => console.log('TODO')}
+        />
+        <Button
+          style={{width: '100%'}}
+          content="Random Movie 🎲"
+          onPress={() => console.log('TODO')}
+        />
+        <Button
+          style={{width: '100%'}}
+          content="Boredom Buster ⚡"
+          onPress={() => onNavigate('EventDay')}
+        />
       </Container>
     </ScrollView>
   );
