@@ -8,9 +8,7 @@ import React, {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface User {
-  firstName: string;
-  lastName: string;
-  nickname: string;
+  name: string;
   email: string;
   id: string;
   password: string;

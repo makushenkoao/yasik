@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Input} from '@shared/ui/Input';
-import {View} from 'react-native';
+import {View, Button as RNButton} from 'react-native';
 import {Button} from '@shared/ui/Button';
 import {
   RegisterData,
@@ -11,18 +11,17 @@ import {PasswordInput} from '@shared/ui/PasswordInput';
 interface RegisterProps {
   onSubmit: (data: RegisterData) => void;
   setLoginScreen: () => void;
+  loading?: boolean
 }
 
 const initialState = {
-  firstName: '',
-  lastName: '',
-  nickname: '',
-  email: '',
-  password: '',
+  name: 'Anton',
+  email: 'olegpro2046@gmail.com',
+  password: '1407Anton',
 };
 
 export const Register = (props: RegisterProps) => {
-  const {onSubmit, setLoginScreen} = props;
+  const {onSubmit, setLoginScreen, loading} = props;
 
   const [inputs, setInputs] = useState<RegisterData>({...initialState});
 
@@ -43,21 +42,8 @@ export const Register = (props: RegisterProps) => {
       <Input
         placeholder="Enter First Name"
         variant="outlined"
-        value={inputs.firstName}
-        onChangeText={text => handleChange('firstName', text)}
-      />
-      <Input
-        placeholder="Enter Last Name"
-        variant="outlined"
-        value={inputs.lastName}
-        onChangeText={text => handleChange('lastName', text)}
-      />
-      <Input
-        placeholder="Enter Nickname"
-        autoCapitalize="none"
-        variant="outlined"
-        value={inputs.nickname}
-        onChangeText={text => handleChange('nickname', text)}
+        value={inputs.name}
+        onChangeText={text => handleChange('name', text)}
       />
       <Input
         placeholder="Enter Email"
@@ -75,12 +61,8 @@ export const Register = (props: RegisterProps) => {
         onChangeText={text => handleChange('password', text)}
       />
       <View>
-        <Button content="Sign Up" onPress={onRegister} />
-        <Button
-          variant="dark"
-          content="Login to existing account"
-          onPress={setLoginScreen}
-        />
+        <Button content="Sign Up" onPress={onRegister} loading={loading} />
+        <RNButton title="Login to existing account" onPress={setLoginScreen} disabled={loading} />
       </View>
     </View>
   );

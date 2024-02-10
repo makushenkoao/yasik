@@ -4,9 +4,10 @@ import React from 'react';
 import {Screen} from '@widgets/Screen/ui/Screen.tsx';
 import {Button} from '@shared/ui/Button';
 import {Colors} from '@shared/const/colors.ts';
+import {useUser} from '@app/providers/user/UserProvider.tsx';
 
 export const ProfileScreen = () => {
-  const onLeaveFromApp = () => {};
+  const {logout} = useUser();
 
   const onDeleteAccount = () => {};
 
@@ -18,7 +19,7 @@ export const ProfileScreen = () => {
             Your Name
           </Text>
           <View>
-            <Button onPress={onLeaveFromApp} content="Leave From App" />
+            <Button onPress={logout} content="Leave From App" />
             <Button
               onPress={onDeleteAccount}
               content="Delete Account"

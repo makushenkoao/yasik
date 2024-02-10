@@ -8,8 +8,9 @@ import {
   LoginData,
   RegisterData,
 } from '@screens/LoginScreen/model/types/login.ts';
-import {$api} from '@shared/api/api.ts';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
+import {login} from '@screens/LoginScreen/model/services/login.ts';
+import {register} from '@screens/LoginScreen/model/services/register.ts';
 
 // TODO:
 //  remake login
@@ -19,6 +20,7 @@ import {useUser} from '@app/providers/user/UserProvider.tsx';
 
 export const LoginScreen = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const [loading, setLoading] = useState(false);
   const userContext = useUser();
 
   const setLoginScreen = () => {
@@ -29,28 +31,18 @@ export const LoginScreen = () => {
     setIsLogin(false);
   };
   const onRegister = async (data: RegisterData) => {
-    try {
-      const response = await $api.post('/register', data);
-
-      setIsLogin(true);
-
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    setLoading(true);
+    register(data)
+      .then(() => setIsLogin(true))
+      .finally(() => setLoading(false));
   };
 
   // TODO: fix login in iPhone
   const onLogin = async (data: LoginData) => {
-    try {
-      const response = await $api.post('/login', data);
-
-      userContext.login(response.data);
-
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    setLoading(true);
+    login(data)
+      .then(user => userContext.login(user))
+      .finally(() => setLoading(false));
   };
 
   const emojiText = isLogin
@@ -72,9 +64,17 @@ export const LoginScreen = () => {
           }}>
           <Emoji text={emojiText} />
           {isLogin ? (
-            <Login onSubmit={onLogin} setRegisterScreen={setRegisterScreen} />
+            <Login
+              onSubmit={onLogin}
+              setRegisterScreen={setRegisterScreen}
+              loading={loading}
+            />
           ) : (
-            <Register onSubmit={onRegister} setLoginScreen={setLoginScreen} />
+            <Register
+              onSubmit={onRegister}
+              setLoginScreen={setLoginScreen}
+              loading={loading}
+            />
           )}
         </View>
       </ScrollView>

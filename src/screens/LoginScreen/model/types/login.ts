@@ -1,13 +1,11 @@
 export interface RegisterData {
-  firstName: string;
-  lastName: string;
+  name: string;
   email: string;
-  nickname: string;
   password: string;
 }
 
 export interface LoginData {
-  nickname: string;
+  email: string;
   password: string;
 }
 

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Input} from '@shared/ui/Input';
-import {View} from 'react-native';
+import {View, Button as RNButton} from 'react-native';
 import {Button} from '@shared/ui/Button';
 import {LoginData, LoginField} from '@screens/LoginScreen/model/types/login.ts';
 import {PasswordInput} from '@shared/ui/PasswordInput';
@@ -8,15 +8,16 @@ import {PasswordInput} from '@shared/ui/PasswordInput';
 interface LoginProps {
   onSubmit: (data: LoginData) => void;
   setRegisterScreen: () => void;
+  loading?: boolean;
 }
 
 const initialState = {
-  nickname: '',
-  password: '',
+  email: 'olegpro2046@gmail.com',
+  password: '1407Anton',
 };
 
 export const Login = (props: LoginProps) => {
-  const {onSubmit, setRegisterScreen} = props;
+  const {onSubmit, setRegisterScreen, loading} = props;
   const [inputs, setInputs] = useState<LoginData>({...initialState});
 
   const handleChange = (name: LoginField, value: string) => {
@@ -36,9 +37,10 @@ export const Login = (props: LoginProps) => {
       <Input
         placeholder="Enter Nickname"
         variant="outlined"
-        value={inputs.nickname}
+        value={inputs.email}
         autoCapitalize="none"
-        onChangeText={value => handleChange('nickname', value)}
+        keyboardType="email-address"
+        onChangeText={value => handleChange('email', value)}
       />
       <PasswordInput
         placeholder="Enter Password"
@@ -48,11 +50,11 @@ export const Login = (props: LoginProps) => {
         onChangeText={value => handleChange('password', value)}
       />
       <View>
-        <Button content="Sign In" onPress={onLogin} />
-        <Button
-          variant="dark"
-          content="Register a new account"
+        <Button content="Sign In" onPress={onLogin} loading={loading} />
+        <RNButton
+          title="Register a new account"
           onPress={setRegisterScreen}
+          disabled={loading}
         />
       </View>
     </View>
