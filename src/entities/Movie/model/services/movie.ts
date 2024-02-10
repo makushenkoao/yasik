@@ -25,3 +25,57 @@ export async function getRandomMovie() {
 
   return randomMovie;
 }
+
+export const getMovieDetails = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `${config.THEMOVIEDB_URL}/movie/${id}?language=en-US`,
+      {
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${config.THEMOVIEDB_KEY}`,
+        },
+      },
+    );
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMovieImages = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `${config.THEMOVIEDB_URL}/movie/${id}/images`,
+      {
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${config.THEMOVIEDB_KEY}`,
+        },
+      },
+    );
+
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+export const getMovieTrailer = async (id: string) => {
+  try {
+    const response = await axios.get(
+      `${config.THEMOVIEDB_URL}/movie/${id}/videos`,
+      {
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${config.THEMOVIEDB_KEY}`,
+        },
+      },
+    );
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching trailer:', error);
+  }
+};

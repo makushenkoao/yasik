@@ -1,6 +1,5 @@
 import React from 'react';
 import {ImageBackground, Text, TouchableOpacity} from 'react-native';
-import {Colors} from '@shared/const/colors.ts';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles.ts';
 
@@ -15,7 +14,10 @@ export const MoviePoster = (props: MoviePosterProps) => {
 
   const navigation = useNavigation();
 
-  const onNavigate = () => {};
+  const onNavigate = () => {
+    // @ts-ignore
+    navigation.navigate('MovieDetails', {id});
+  };
 
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={onNavigate}>

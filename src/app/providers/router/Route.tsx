@@ -6,7 +6,8 @@ import {LoginScreen} from '@screens/LoginScreen';
 import {ProfileScreen} from '@screens/ProfileScreen';
 import {ProfileEditScreen} from '@screens/ProfileEditScreen';
 import {EventDayScreen} from '@screens/EventDayScreen';
-import { RandomMovie } from "@screens/RandomMovie";
+import {RandomMovie} from '@screens/RandomMovie';
+import {MovieDetails} from '@screens/MovieDetails/ui/MovieDetails.tsx';
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -36,6 +37,11 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="RandomMovie"
       component={RandomMovie}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="MovieDetails"
+      component={MovieDetails}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>

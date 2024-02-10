@@ -1,12 +1,11 @@
 export interface RootParamList {
   Home: undefined;
-  CreateTodo: undefined;
-  Movie: undefined;
-  Todo: undefined;
+  EventDay: undefined;
+  MovieDetails: {id: string};
+  ProfileEdit: undefined;
   Profile: undefined;
-  Settings: undefined;
-  Support: undefined;
-  Account: undefined;
-  Header: undefined;
+  RandomMovie: undefined;
+  CreateMovieSession: undefined;
+  ConnectMovieSession: undefined;
   [key: string]: any;
 }
