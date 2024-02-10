@@ -8,24 +8,27 @@ export default StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 16,
     marginVertical: 8,
+    position: 'relative',
+    padding: 12,
   },
   primary: {
     backgroundColor: Colors.ACCENT,
-    padding: 12,
   },
-  secondary: {
-    backgroundColor: Colors.HIGHLIGHT,
-    padding: 12,
-  },
-  dark: {
-    backgroundColor: Colors.SECONDARY,
-    padding: 12,
+  error: {
+    borderColor: Colors.IMPORTANT,
+    borderWidth: 1,
   },
   text: {
-    fontSize: 14,
+    fontSize: 16,
     color: Colors.TEXT,
   },
   textBold: {
     fontWeight: 'bold',
+  },
+  textError: {
+    color: Colors.IMPORTANT,
+  },
+  disabled: {
+    backgroundColor: Colors.DISABLED,
   },
 });

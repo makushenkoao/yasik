@@ -11,6 +11,12 @@ import {
 import {$api} from '@shared/api/api.ts';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
 
+// TODO:
+//  remake login
+//  handle error
+//  handle loading
+//  forgot password
+
 export const LoginScreen = () => {
   const [isLogin, setIsLogin] = useState(true);
   const userContext = useUser();

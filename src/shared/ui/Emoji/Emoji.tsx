@@ -1,13 +1,21 @@
 import React, {useState} from 'react';
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import styles from './styles.ts';
 
 interface EmojiProps {
   text: string;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const Emoji = (props: EmojiProps) => {
-  const {text} = props;
+  const {text, style} = props;
 
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -17,7 +25,7 @@ export const Emoji = (props: EmojiProps) => {
 
   return (
     <TouchableOpacity onPress={handleImageClick} activeOpacity={0.7}>
-      <View style={styles.wrapper}>
+      <View style={[styles.wrapper, style]}>
         {isFlipped ? (
           <View style={styles.textContainer}>
             <Text style={styles.text}>{text}</Text>

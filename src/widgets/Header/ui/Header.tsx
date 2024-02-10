@@ -14,7 +14,7 @@ export const Header = (props: HeaderProps) => {
   const navigation = useNavigation();
 
   const onNavigate = (to: string) => {
-    // TODO
+    // TODO: fix typescript error
     // @ts-ignore
     navigation.navigate(to);
   };
@@ -133,8 +133,8 @@ const styles = StyleSheet.create({
     right: 20,
   },
   icon: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     tintColor: Colors.ACCENT,
   },
   title: {

@@ -19,7 +19,7 @@ export const ProfileEditScreen = () => {
 
   return (
     <Screen headerVariant="close" headerTitle="Profile Edit">
-      <Container style={{marginTop: 140, marginBottom: 60}}>
+      <Container style={{marginTop: 140, marginBottom: 40}}>
         <View style={{height: '100%', justifyContent: 'space-between'}}>
           <Input
             placeholder="Enter Your Name"

@@ -15,4 +15,5 @@ export enum Colors {
   LOW_PRIORITY = '#0090ff',
   NO_PRIORITY = '#55b5ff',
   IMPORTANT = '#e30404',
+  DISABLED = '#2f2f2f',
 }

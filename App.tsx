@@ -1,11 +1,17 @@
 import React from 'react';
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import {Routes} from './src/app/providers/router/Route.tsx';
+import {Routes} from '@app/providers/router/Route';
 import {ToastProvider} from 'react-native-toast-notifications';
-import {Colors} from '@shared/const/colors.ts';
-import {UserProvider} from '@app/providers/user/UserProvider.tsx';
+import {Colors} from '@shared/const/colors';
+import {UserProvider} from '@app/providers/user/UserProvider';
 
-// TODO: fix lint
+// TODO:
+//  fix lint
+//  validation forms
+//  input type error, disabled
+//  create session, connect session screens
+//  matches screens
+//  swipeable modal in activity screen
 
 function App(): React.JSX.Element {
   const theme = {

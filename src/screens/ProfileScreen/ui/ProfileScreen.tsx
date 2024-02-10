@@ -1,5 +1,4 @@
-import {Header} from '@widgets/Header';
-import {ScrollView, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {Container} from '@shared/ui/Container';
 import React from 'react';
 import {Screen} from '@widgets/Screen/ui/Screen.tsx';
@@ -20,7 +19,11 @@ export const ProfileScreen = () => {
           </Text>
           <View>
             <Button onPress={onLeaveFromApp} content="Leave From App" />
-            <Button onPress={onDeleteAccount} content="Delete Account" />
+            <Button
+              onPress={onDeleteAccount}
+              content="Delete Account"
+              variant="error"
+            />
           </View>
         </View>
       </Container>

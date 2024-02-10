@@ -1,25 +1,60 @@
-import {StyleProp, Text, TouchableOpacity, ViewStyle} from 'react-native';
+import {
+  ActivityIndicator,
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  ViewStyle,
+} from 'react-native';
 import React, {memo} from 'react';
 import styles from './styles';
 
-type ButtonVariant = 'primary' | 'secondary' | 'dark';
+type ButtonVariant = 'primary' | 'error';
 
-interface ButtonProps {
+interface ButtonProps extends TouchableOpacityProps {
   content: string;
   onPress: () => void;
   variant?: ButtonVariant;
   style?: StyleProp<ViewStyle>;
   bold?: boolean;
+  loading?: boolean;
 }
 
 export const Button = memo((props: ButtonProps) => {
-  const {content, onPress, variant = 'primary', style, bold = false} = props;
+  const {
+    content,
+    onPress,
+    variant = 'primary',
+    style,
+    loading,
+    bold = false,
+    disabled,
+    ...rest
+  } = props;
   return (
     <TouchableOpacity
-      style={[styles.container, styles[variant], style]}
-      activeOpacity={0.8}
-      onPress={onPress}>
-      <Text style={[styles.text, bold && styles.textBold]}>{content}</Text>
+      style={[
+        styles.container,
+        styles[variant],
+        disabled && styles.disabled,
+        loading && styles.disabled,
+        style,
+      ]}
+      activeOpacity={0.7}
+      disabled={disabled || loading}
+      onPress={onPress}
+      {...rest}>
+      {!loading && (
+        <Text
+          style={[
+            styles.text,
+            bold && styles.textBold,
+            variant === 'error' && styles.textError,
+          ]}>
+          {content}
+        </Text>
+      )}
+      {loading && <ActivityIndicator size="small" color="#fff" />}
     </TouchableOpacity>
   );
 });

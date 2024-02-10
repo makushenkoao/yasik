@@ -49,7 +49,7 @@ export const HomeScreen = (props: HomeScreenProps) => {
         <Button
           style={{width: '100%'}}
           content="Random Movie 🎲"
-          onPress={() => console.log('TODO')}
+          onPress={() => onNavigate('RandomMovie')}
         />
         <Button
           style={{width: '100%'}}

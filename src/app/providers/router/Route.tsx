@@ -6,6 +6,7 @@ import {LoginScreen} from '@screens/LoginScreen';
 import {ProfileScreen} from '@screens/ProfileScreen';
 import {ProfileEditScreen} from '@screens/ProfileEditScreen';
 import {EventDayScreen} from '@screens/EventDayScreen';
+import { RandomMovie } from "@screens/RandomMovie";
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -30,6 +31,11 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="EventDay"
       component={EventDayScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="RandomMovie"
+      component={RandomMovie}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>
