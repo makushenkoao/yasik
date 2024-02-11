@@ -79,3 +79,21 @@ export const getMovieTrailer = async (id: string) => {
     console.error('Error fetching trailer:', error);
   }
 };
+
+export const getMovieGenres = async () => {
+  try {
+    const response = await axios.get(
+      `${config.THEMOVIEDB_URL}/genre/movie/list`,
+      {
+        headers: {
+          accept: 'application/json',
+          Authorization: `Bearer ${config.THEMOVIEDB_KEY}`,
+        },
+      },
+    );
+
+    return response.data.genres;
+  } catch (error) {
+    console.error('Error fetching trailer:', error);
+  }
+};

@@ -8,6 +8,9 @@ import {ProfileEditScreen} from '@screens/ProfileEditScreen';
 import {EventDayScreen} from '@screens/EventDayScreen';
 import {RandomMovie} from '@screens/RandomMovie';
 import {MovieDetails} from '@screens/MovieDetails/ui/MovieDetails.tsx';
+import {ConnectToSessionScreen} from '@screens/ConnectToSessionScreen/ui/ConnectToSessionScreen.tsx';
+import {CreateMovieSession} from '@screens/CreateMovieSession/ui/CreateMovieSession.tsx';
+import { StartSessionScreen } from "@screens/StartSessionScreen/ui/StartSessionScreen.tsx";
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -42,6 +45,21 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="MovieDetails"
       component={MovieDetails}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="ConnectToSession"
+      component={ConnectToSessionScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="CreateSession"
+      component={CreateMovieSession}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="StartSession"
+      component={StartSessionScreen}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>

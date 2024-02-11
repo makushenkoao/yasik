@@ -1,3 +1,5 @@
+import * as stream from 'stream';
+
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
@@ -96,4 +98,9 @@ export interface MovieDetails {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
 }

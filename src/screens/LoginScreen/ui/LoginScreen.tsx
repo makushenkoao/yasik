@@ -1,4 +1,4 @@
-import {SafeAreaView, ScrollView, View} from 'react-native';
+import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import {Emoji} from '@shared/ui/Emoji';
 import {Colors} from '@shared/const/colors.ts';
 import {useState} from 'react';
@@ -50,19 +50,19 @@ export const LoginScreen = () => {
     : 'Become a user of a wonderful application 🤖';
 
   return (
-    <SafeAreaView
+    <View
       style={{
         backgroundColor: Colors.BACKGROUND,
         flex: 1,
       }}>
       <ScrollView>
+        <Emoji text={emojiText} />
         <View
           style={{
-            marginHorizontal: 24,
-            marginVertical: 20,
+            paddingHorizontal: 24,
+            paddingVertical: 20,
             justifyContent: 'space-between',
           }}>
-          <Emoji text={emojiText} />
           {isLogin ? (
             <Login
               onSubmit={onLogin}
@@ -78,6 +78,6 @@ export const LoginScreen = () => {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };

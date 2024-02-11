@@ -7,5 +7,6 @@ export interface RootParamList {
   RandomMovie: undefined;
   CreateMovieSession: undefined;
   ConnectMovieSession: undefined;
+  StartSession: undefined;
   [key: string]: any;
 }

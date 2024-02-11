@@ -38,13 +38,13 @@ export const HomeScreen = (props: HomeScreenProps) => {
         }}>
         <Button
           style={{width: '100%'}}
-          content="Creare session 🎥"
-          onPress={() => onNavigate('Todo')}
+          content="Create session 🎥"
+          onPress={() => onNavigate('CreateSession')}
         />
         <Button
           style={{width: '100%'}}
           content="Connect to Session 🤝"
-          onPress={() => console.log('TODO')}
+          onPress={() => onNavigate('ConnectToSession')}
         />
         <Button
           style={{width: '100%'}}

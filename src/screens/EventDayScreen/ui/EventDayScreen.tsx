@@ -18,6 +18,7 @@ import styles from './styles';
 export const EventDayScreen = () => {
   const [activity, setActivity] = useState<Activity | undefined>(undefined);
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [selectedType, setSelectedType] = useState<ActivityType | null>(null);
   const [participants, setParticipants] = useState<string>('');
   const [minprice, setMinrice] = useState<string>('');
@@ -25,17 +26,23 @@ export const EventDayScreen = () => {
   const [step, setStep] = useState(1);
 
   const onGetRandomActivityType = () => {
-    getRandomActivity().then(setActivity);
+    setLoading(true);
+    getRandomActivity()
+      .then(setActivity)
+      .finally(() => setLoading(false));
   };
 
   const onGetFilteredActivity = () => {
+    setLoading(true);
     onCloseModal();
     getFilteredActivity({
       type: selectedType,
       maxprice,
       minprice,
       participants,
-    }).then(setActivity);
+    })
+      .then(setActivity)
+      .finally(() => setLoading(false));
   };
 
   const setUpActivity = () => {
@@ -110,13 +117,20 @@ export const EventDayScreen = () => {
       <Emoji text="Let's find something for you to do today 🎯" />
       <Container>
         <Button
+          loading={loading}
           content="Get Random Activity"
           onPress={onGetRandomActivityType}
         />
-        <Button content="Set up Activity" onPress={setUpActivity} />
+        <Button
+          loading={loading}
+          content="Set up Activity"
+          onPress={setUpActivity}
+        />
         {activity && (
           <View style={styles.activityWrapper}>
-            <Text style={styles.activityTitle}>We have found an activity 😎</Text>
+            <Text style={styles.activityTitle}>
+              We have found an activity 😎
+            </Text>
             {activitiesBlocks.map(item => (
               <Text key={item.id} style={styles.activityText}>
                 <Text style={styles.activityTextBold}>{item.label}</Text>
