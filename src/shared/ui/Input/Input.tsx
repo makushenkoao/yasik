@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {StyleSheet, TextInput, TextInputProps} from 'react-native';
+import {TextInput, TextInputProps} from 'react-native';
 import styles from './styles';
 import {Colors} from '@shared/const/colors.ts';
 

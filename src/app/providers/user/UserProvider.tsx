@@ -22,7 +22,7 @@ interface ContextType {
 
 const UserContext = createContext<ContextType>({
   user: null,
-  login: (userData: User) => {},
+  login: () => {},
   logout: () => {},
 });
 

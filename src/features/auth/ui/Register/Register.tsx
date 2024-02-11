@@ -2,16 +2,14 @@ import React, {useState} from 'react';
 import {Input} from '@shared/ui/Input';
 import {View, Button as RNButton} from 'react-native';
 import {Button} from '@shared/ui/Button';
-import {
-  RegisterData,
-  RegisterField,
-} from '@screens/LoginScreen/model/types/login.ts';
+import {RegisterData, RegisterField} from '../../model/types/auth.ts';
 import {PasswordInput} from '@shared/ui/PasswordInput';
+import styles from './styles.ts';
 
 interface RegisterProps {
   onSubmit: (data: RegisterData) => void;
   setLoginScreen: () => void;
-  loading?: boolean
+  loading?: boolean;
 }
 
 const initialState = {
@@ -38,7 +36,7 @@ export const Register = (props: RegisterProps) => {
   };
 
   return (
-    <View style={{marginTop: 20, gap: 10}}>
+    <View style={styles.container}>
       <Input
         placeholder="Enter First Name"
         variant="outlined"
@@ -62,7 +60,11 @@ export const Register = (props: RegisterProps) => {
       />
       <View>
         <Button content="Sign Up" onPress={onRegister} loading={loading} />
-        <RNButton title="Login to existing account" onPress={setLoginScreen} disabled={loading} />
+        <RNButton
+          title="Login to existing account"
+          onPress={setLoginScreen}
+          disabled={loading}
+        />
       </View>
     </View>
   );

@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Input} from '@shared/ui/Input';
 import {View, Button as RNButton} from 'react-native';
 import {Button} from '@shared/ui/Button';
-import {LoginData, LoginField} from '@screens/LoginScreen/model/types/login.ts';
+import {LoginData, LoginField} from '../../model/types/auth.ts';
 import {PasswordInput} from '@shared/ui/PasswordInput';
+import styles from './styles.ts';
 
 interface LoginProps {
   onSubmit: (data: LoginData) => void;
@@ -33,7 +34,7 @@ export const Login = (props: LoginProps) => {
   };
 
   return (
-    <View style={{marginTop: 20, gap: 10}}>
+    <View style={styles.container}>
       <Input
         placeholder="Enter Nickname"
         variant="outlined"

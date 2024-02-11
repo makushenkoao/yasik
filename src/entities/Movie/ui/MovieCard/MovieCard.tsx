@@ -1,6 +1,7 @@
 import React from 'react';
 import {ImageBackground, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {RootParamList} from '@shared/types/router.ts';
 import styles from './styles.ts';
 
 interface MovieCardProps {
@@ -12,9 +13,11 @@ interface MovieCardProps {
 export const MovieCard = (props: MovieCardProps) => {
   const {img, title, id} = props;
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootParamList>();
 
-  const handleClick = () => {};
+  const handleClick = () => {
+    navigation.navigate('MovieDetails', {id});
+  };
 
   return (
     <TouchableOpacity activeOpacity={0.7} onPress={handleClick}>

@@ -1,19 +1,12 @@
-import React, {useState} from 'react';
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React from 'react';
+import {ScrollView, View} from 'react-native';
 import {Container} from '@shared/ui/Container';
-import {Colors} from '@shared/const/colors.ts';
 import {Button} from '@shared/ui/Button';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '@shared/types/router.ts';
 import {Emoji} from '@shared/ui/Emoji';
 import {Header} from '@widgets/Header';
+import styles from './styles.ts';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<RootParamList, 'Home'>;
@@ -27,32 +20,25 @@ export const HomeScreen = (props: HomeScreenProps) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <ScrollView contentContainerStyle={styles.scroll}>
       <Header variant="home" />
       <View>
         <Emoji text="Let's choose what to watch already 🔮" />
       </View>
-      <Container
-        style={{
-          marginVertical: 50,
-        }}>
+      <Container style={styles.container}>
         <Button
-          style={{width: '100%'}}
           content="Create session 🎥"
           onPress={() => onNavigate('CreateSession')}
         />
         <Button
-          style={{width: '100%'}}
           content="Connect to Session 🤝"
           onPress={() => onNavigate('ConnectToSession')}
         />
         <Button
-          style={{width: '100%'}}
           content="Random Movie 🎲"
           onPress={() => onNavigate('RandomMovie')}
         />
         <Button
-          style={{width: '100%'}}
           content="Boredom Buster ⚡"
           onPress={() => onNavigate('EventDay')}
         />
@@ -60,26 +46,3 @@ export const HomeScreen = (props: HomeScreenProps) => {
     </ScrollView>
   );
 };
-
-const styles = StyleSheet.create({
-  image: {
-    width: 300,
-    height: 300,
-  },
-  wrapper: {
-    alignItems: 'center',
-    backgroundColor: Colors.SECONDARY,
-    borderRadius: 50,
-    overflow: 'hidden',
-  },
-  textContainer: {
-    width: 300,
-    height: 300,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  text: {
-    color: 'white',
-    fontSize: 18,
-  },
-});

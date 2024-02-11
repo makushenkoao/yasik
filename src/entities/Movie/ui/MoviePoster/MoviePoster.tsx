@@ -2,6 +2,7 @@ import React from 'react';
 import {ImageBackground, Text, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles.ts';
+import {RootParamList} from '@shared/types/router.ts';
 
 interface MoviePosterProps {
   title: string;
@@ -12,10 +13,9 @@ interface MoviePosterProps {
 export const MoviePoster = (props: MoviePosterProps) => {
   const {title, id, poster_path} = props;
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootParamList>();
 
   const onNavigate = () => {
-    // @ts-ignore
     navigation.navigate('MovieDetails', {id});
   };
 

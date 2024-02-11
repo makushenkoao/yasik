@@ -1,5 +1,5 @@
-import { StyleSheet } from "react-native";
-import { Colors } from "@shared/const/colors.ts";
+import {StyleSheet} from 'react-native';
+import {Colors} from '@shared/const/colors.ts';
 
 export default StyleSheet.create({
   imageBackground: {

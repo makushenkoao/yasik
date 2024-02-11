@@ -1,7 +1,7 @@
-import {Header, HeaderVariant} from '@widgets/Header';
-import {ScrollView} from 'react-native';
 import {ReactNode} from 'react';
-import {Container} from '@shared/ui/Container';
+import {ScrollView} from 'react-native';
+import {Header, HeaderVariant} from '../../Header/ui/Header.tsx';
+import styles from './styles.ts';
 
 interface ScreenProps {
   headerVariant?: HeaderVariant;
@@ -13,7 +13,7 @@ export const Screen = (props: ScreenProps) => {
   const {headerVariant = 'default', children, headerTitle} = props;
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1, flex: 1}}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Header variant={headerVariant} title={headerTitle} />
       {children}
     </ScrollView>

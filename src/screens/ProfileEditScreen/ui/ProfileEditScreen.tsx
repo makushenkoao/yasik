@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Container} from '@shared/ui/Container';
-import {Header} from '@widgets/Header';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import {Screen} from '@widgets/Screen/ui/Screen.tsx';
 import {Input} from '@shared/ui/Input';
 import {Button} from '@shared/ui/Button';
+import styles from './styles.ts';
 
 export const ProfileEditScreen = () => {
   const [name, setName] = useState('Your Name');
@@ -19,8 +19,8 @@ export const ProfileEditScreen = () => {
 
   return (
     <Screen headerVariant="close" headerTitle="Profile Edit">
-      <Container style={{marginTop: 140, marginBottom: 40}}>
-        <View style={{height: '100%', justifyContent: 'space-between'}}>
+      <Container style={styles.container}>
+        <View style={styles.content}>
           <Input
             placeholder="Enter Your Name"
             variant="outlined"

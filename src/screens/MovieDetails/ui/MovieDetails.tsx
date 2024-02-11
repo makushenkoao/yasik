@@ -5,9 +5,7 @@ import {
   ImageBackground,
   Modal,
   ScrollView,
-  StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {useRoute} from '@react-navigation/native';
@@ -20,10 +18,12 @@ import {
   MovieVideo,
 } from '@entities/Movie';
 import WebView from 'react-native-webview';
+import styles from './styles.ts';
 
 export const MovieDetails = () => {
   const route = useRoute();
 
+  // TODO: fix ts errpr
   // @ts-ignore
   const {id} = route.params;
 
@@ -44,10 +44,12 @@ export const MovieDetails = () => {
     setIsShowVideo(false);
   };
 
-  if (!movie || !video) return null;
+  if (!movie || !video) {
+    return null;
+  }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.wrapper}>
       <Header />
       <ImageBackground
         source={{
@@ -66,7 +68,7 @@ export const MovieDetails = () => {
             </Text>
             <Image
               source={require('@shared/assets/images/star.png')}
-              style={{width: 18, height: 18, tintColor: '#adaa06'}}
+              style={styles.starIcon}
             />
           </View>
           <Button
@@ -76,8 +78,8 @@ export const MovieDetails = () => {
           />
         </View>
       </ImageBackground>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{paddingHorizontal: 24, paddingVertical: 20}}>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.container}>
           <View style={styles.genreContainer}>
             {movie.genres.map(genre => (
               <View key={genre.id} style={styles.genre}>
@@ -117,75 +119,3 @@ export const MovieDetails = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  imageBackground: {
-    width: '100%',
-    height: 500,
-    justifyContent: 'flex-end',
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
-  overlay: {
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    padding: 10,
-  },
-  title: {
-    fontSize: 20,
-    color: Colors.TEXT,
-    textAlign: 'center',
-    marginBottom: 5,
-  },
-  details: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  detailText: {
-    color: Colors.TEXT,
-    marginHorizontal: 5,
-  },
-  text: {
-    color: Colors.TEXT,
-    fontSize: 15,
-  },
-  genreContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10,
-    marginBottom: 20,
-  },
-  genre: {
-    borderColor: Colors.BORDER,
-    padding: 10,
-    borderWidth: 1,
-    borderRadius: 12,
-  },
-  genreText: {
-    color: Colors.TEXT,
-  },
-  modalWrapper: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  modalContent: {
-    height: '100%',
-    justifyContent: 'space-between',
-    position: 'relative',
-  },
-  modalContainer: {
-    height: '80%',
-    backgroundColor: Colors.BACKGROUND,
-    borderTopColor: Colors.BORDER,
-    borderWidth: 2,
-    position: 'relative',
-  },
-  scroll: {
-    flexGrow: 1,
-  },
-  webview: {
-    flex: 1,
-    width: '100%',
-    backgroundColor: 'black',
-  },
-});

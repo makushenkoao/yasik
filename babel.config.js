@@ -23,6 +23,7 @@ module.exports = {
           '@widgets': './src/widgets',
           '@screens': './src/screens',
           '@app': './src/app',
+          '@features': './src/features',
         },
       },
     ],

@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
 import {
+  Button as RNButton,
   Image,
   ImageBackground,
   Modal,
   ScrollView,
-  StyleSheet,
+  Share,
   Text,
   TouchableOpacity,
   View,
-  Button as RNButton,
-  Share,
 } from 'react-native';
 import {Header} from '@widgets/Header';
 import {Colors} from '@shared/const/colors.ts';
@@ -18,6 +17,7 @@ import {RootParamList} from '@shared/types/router.ts';
 import {StackNavigationProp} from '@react-navigation/stack';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useToast} from 'react-native-toast-notifications';
+import styles from './styles.ts';
 
 interface StartSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
@@ -68,101 +68,54 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
   const handleCloseModal = () => setIsOpenModal(false);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={styles.wrapper}>
       <Header />
       <ImageBackground
         source={{
-          uri: 'https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg\n',
+          uri: 'https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg',
         }}
-        style={{
-          width: '100%',
-          height: 400,
-          borderRadius: 12,
-          justifyContent: 'flex-end',
-          overflow: 'hidden',
-        }}>
-        <View
-          style={{
-            backgroundColor: 'rgba(0, 0, 0, 0.7)',
-            padding: 10,
-          }}>
-          <Text
-            style={{
-              color: Colors.TEXT,
-              textAlign: 'center',
-              marginBottom: 10,
-              fontSize: 20,
-            }}>
-            Participants
-          </Text>
-          <Text
-            style={{
-              color: Colors.TEXT,
-              textAlign: 'center',
-              fontSize: 16,
-              paddingHorizontal: 30,
-              lineHeight: 20,
-            }}>
+        style={styles.imageBackground}>
+        <View style={styles.imageBackgroundContent}>
+          <Text style={styles.imageBackgroundTitle}>Participants</Text>
+          <Text style={styles.imageBackgroundDescription}>
             If you invited friends, wait until they connect before starting the
             session.
           </Text>
         </View>
       </ImageBackground>
-      <View style={{paddingVertical: 20, paddingHorizontal: 24}}>
+      <View style={styles.container}>
         <Text style={{color: Colors.TEXT}}>Session Code</Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: 10,
-          }}>
+        <View style={styles.buttonsWrapper}>
           <TouchableOpacity
             onPress={handleCopyCode}
             activeOpacity={0.7}
-            style={{
-              backgroundColor: '#444444',
-              flex: 1,
-              borderRadius: 16,
-              padding: 12,
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
-            <Text style={{color: Colors.TEXT, fontSize: 15}}>MOCK_CODE</Text>
+            style={styles.codeButton}>
+            <Text style={styles.codeText}>MOCK_CODE</Text>
             <Image
               source={require('@shared/assets/images/copy.png')}
-              style={{width: 20, height: 20, tintColor: Colors.TEXT}}
+              style={styles.codeImage}
             />
           </TouchableOpacity>
-          <Button style={{flex: 1}} content="Invite" onPress={handleInvite} />
+          <Button
+            style={styles.inviteBtn}
+            content="Invite"
+            onPress={handleInvite}
+          />
         </View>
       </View>
-      <ScrollView contentContainerStyle={{flexGrow: 1}}>
-        <View style={{paddingHorizontal: 24}}>
-          <Text
-            style={{
-              color: Colors.TEXT,
-              marginBottom: 10,
-              fontSize: 16,
-            }}>
-            Participants
-          </Text>
-          <View style={{flexDirection: 'row', gap: 10, flexWrap: 'wrap'}}>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.participantsContainer}>
+          <Text style={styles.participantsTitle}>Participants</Text>
+          <View style={styles.participantList}>
             {['Jackson', 'Derek', 'Scott', 'Anton (You)'].map(item => (
-              <View
-                key={item}
-                style={{
-                  padding: 10,
-                  backgroundColor: '#444',
-                  borderRadius: 12,
-                }}>
-                <Text style={{color: Colors.TEXT}}>{item}</Text>
+              <View key={item} style={styles.participantBlock}>
+                <Text style={styles.participantName}>{item}</Text>
               </View>
             ))}
           </View>
         </View>
       </ScrollView>
-      <View style={{paddingVertical: 20, paddingHorizontal: 24}}>
+      <View style={styles.container}>
         <Button
           // loading={loading}
           content="Start Session"
@@ -182,20 +135,18 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
         transparent>
         <View style={styles.modalWrapper}>
           <View style={styles.modalContainer}>
-            <Text
-              style={{color: Colors.TEXT, fontSize: 18, textAlign: 'center'}}>
+            <Text style={styles.modalTitle}>
               Are you sure you want to cancel your session?
             </Text>
-            <View
-              style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={{flex: 1}}>
+            <View style={styles.modalButtons}>
+              <View style={styles.modalButton}>
                 <RNButton
                   color={Colors.HIGHLIGHT}
                   title="Yes"
                   onPress={handleCancelSession}
                 />
               </View>
-              <View style={{flex: 1}}>
+              <View style={styles.modalButton}>
                 <RNButton
                   color={Colors.HIGHLIGHT}
                   title="No"
@@ -209,22 +160,3 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  modalWrapper: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.7)',
-  },
-  modalContainer: {
-    height: 200,
-    width: '80%',
-    backgroundColor: '#333',
-    borderRadius: 30,
-    paddingHorizontal: 24,
-    paddingVertical: 30,
-    position: 'relative',
-    justifyContent: 'space-between',
-  },
-});

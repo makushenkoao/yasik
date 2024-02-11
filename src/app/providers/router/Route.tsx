@@ -7,10 +7,10 @@ import {ProfileScreen} from '@screens/ProfileScreen';
 import {ProfileEditScreen} from '@screens/ProfileEditScreen';
 import {EventDayScreen} from '@screens/EventDayScreen';
 import {RandomMovie} from '@screens/RandomMovie';
-import {MovieDetails} from '@screens/MovieDetails/ui/MovieDetails.tsx';
-import {ConnectToSessionScreen} from '@screens/ConnectToSessionScreen/ui/ConnectToSessionScreen.tsx';
-import {CreateMovieSession} from '@screens/CreateMovieSession/ui/CreateMovieSession.tsx';
-import { StartSessionScreen } from "@screens/StartSessionScreen/ui/StartSessionScreen.tsx";
+import {MovieDetails} from '@screens/MovieDetails';
+import {ConnectToSessionScreen} from '@screens/ConnectToSessionScreen';
+import {CreateMovieSession} from '@screens/CreateMovieSession';
+import {StartSessionScreen} from '@screens/StartSessionScreen';
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();

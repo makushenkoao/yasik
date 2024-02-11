@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Container} from '@shared/ui/Container';
 import {Button} from '@shared/ui/Button';
 import {Screen} from '@widgets/Screen';
@@ -6,6 +6,7 @@ import {Text, View, Button as RNButton, Share} from 'react-native';
 import {Emoji} from '@shared/ui/Emoji';
 import {Colors} from '@shared/const/colors.ts';
 import {getRandomMovie, Movie, MoviePoster} from '@entities/Movie';
+import styles from './styles.ts';
 
 export const RandomMovie = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
@@ -28,7 +29,9 @@ export const RandomMovie = () => {
   };
 
   const handleShare = () => {
-    if (!movie) return null;
+    if (!movie) {
+      return null;
+    }
 
     const message = `I found a movie to watch!\n\n"${movie.title}" | ${new Date(
       movie.release_date,
@@ -48,7 +51,7 @@ export const RandomMovie = () => {
           console.log('Dismissed');
         }
       })
-      .catch(error => console.error('Failed to share:', error));
+      .catch(err => console.error('Failed to share:', err));
   };
 
   return (
@@ -56,7 +59,7 @@ export const RandomMovie = () => {
       {!movie && (
         <Emoji
           text="Choose a random popular movie for your evening 🌇"
-          style={{height: 600, alignItems: 'center', justifyContent: 'center'}}
+          style={styles.emoji}
         />
       )}
       {movie && (
@@ -67,21 +70,18 @@ export const RandomMovie = () => {
         />
       )}
       <Container>
-        <View style={{height: '100%', justifyContent: 'space-between'}}>
+        <View style={styles.content}>
           <View>
-            {movie && <RNButton onPress={handleShare} title="Share" color={Colors.HIGHLIGHT} />}
+            {movie && (
+              <RNButton
+                onPress={handleShare}
+                title="Share"
+                color={Colors.HIGHLIGHT}
+              />
+            )}
           </View>
           <View>
-            {error && (
-              <Text
-                style={{
-                  color: Colors.ERROR,
-                  marginBottom: 20,
-                  textAlign: 'center',
-                }}>
-                {error}
-              </Text>
-            )}
+            {error && <Text style={styles.error}>{error}</Text>}
             <Button
               loading={loading}
               content="Get Random Movie"

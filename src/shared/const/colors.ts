@@ -10,10 +10,6 @@ export enum Colors {
   LINK = '#2196F3',
   BORDER = '#555',
   PLACEHOLDER = '#888',
-  COMPLETED = '#007a04',
-  PRIORITY = '#ffac2e',
-  LOW_PRIORITY = '#0090ff',
-  NO_PRIORITY = '#55b5ff',
   IMPORTANT = '#e30404',
   DISABLED = '#2f2f2f',
 }

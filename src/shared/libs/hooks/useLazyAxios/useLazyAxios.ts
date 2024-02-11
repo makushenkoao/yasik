@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import axios, {AxiosRequestConfig, Method} from 'axios';
 
-interface UseAxiosArgs<T> {
+interface UseAxiosArgs {
   url: string;
   method: Method;
   body?: object | null;
@@ -15,7 +15,7 @@ interface UseAxiosResponse<T> {
   fetchData: () => void;
 }
 
-export function useAxios<T>(props: UseAxiosArgs<T>): UseAxiosResponse<T> {
+export function useAxios<T>(props: UseAxiosArgs): UseAxiosResponse<T> {
   const {url, method, body = null, headers = null} = props;
 
   const [response, setResponse] = useState<T | null>(null);

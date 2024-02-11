@@ -1,6 +1,7 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Colors} from '@shared/const/colors.ts';
+import {Image, Text, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import styles from './index.ts';
+import {RootParamList} from '@shared/types/router.ts';
 
 export type HeaderVariant = 'default' | 'home' | 'profile' | 'close';
 
@@ -11,11 +12,9 @@ interface HeaderProps {
 
 export const Header = (props: HeaderProps) => {
   const {variant = 'default', title} = props;
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootParamList>();
 
   const onNavigate = (to: string) => {
-    // TODO: fix typescript error
-    // @ts-ignore
     navigation.navigate(to);
   };
 
@@ -117,43 +116,3 @@ export const Header = (props: HeaderProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    zIndex: 1000,
-  },
-  leftIconWrapper: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    width: 60,
-    height: 60,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-  },
-  rightIconWrapper: {
-    position: 'absolute',
-    top: 60,
-    right: 20,
-    width: 60,
-    height: 60,
-    backgroundColor: '#000',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 50,
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    tintColor: '#fff',
-  },
-  title: {
-    color: 'white',
-    position: 'absolute',
-    top: 75,
-    right: '50%',
-    fontSize: 16,
-  },
-});
