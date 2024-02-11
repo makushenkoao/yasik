@@ -47,7 +47,7 @@ export const MovieDetails = () => {
   if (!movie || !video) return null;
 
   return (
-    <ScrollView contentContainerStyle={{flexGrow: 1}}>
+    <View style={{flex: 1}}>
       <Header />
       <ImageBackground
         source={{
@@ -70,22 +70,24 @@ export const MovieDetails = () => {
             />
           </View>
           <Button
-            title="Show Video"
+            title="Show Movie Trailer"
             onPress={onOpenModal}
             color={Colors.HIGHLIGHT}
           />
         </View>
       </ImageBackground>
-      <View style={{marginHorizontal: 24, paddingVertical: 20}}>
-        <View style={styles.genreContainer}>
-          {movie.genres.map(genre => (
-            <View key={genre.id} style={styles.genre}>
-              <Text style={styles.genreText}>{genre.name}</Text>
-            </View>
-          ))}
+      <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <View style={{paddingHorizontal: 24, paddingVertical: 20}}>
+          <View style={styles.genreContainer}>
+            {movie.genres.map(genre => (
+              <View key={genre.id} style={styles.genre}>
+                <Text style={styles.genreText}>{genre.name}</Text>
+              </View>
+            ))}
+          </View>
+          <Text style={styles.text}>{movie.overview}</Text>
         </View>
-        <Text style={styles.text}>{movie.overview}</Text>
-      </View>
+      </ScrollView>
       <Modal
         animationType="slide"
         transparent={true}
@@ -112,7 +114,7 @@ export const MovieDetails = () => {
           </View>
         </View>
       </Modal>
-    </ScrollView>
+    </View>
   );
 };
 

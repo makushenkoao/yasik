@@ -14,6 +14,10 @@ import {UserProvider} from '@app/providers/user/UserProvider';
 //  swipeable modal in activity screen
 //  add to fav movie
 //  подстраивать клавиатуру под инпут при фокусе
+//  movie swipe
+//  matches history
+//  matches details
+//  api
 
 function App(): React.JSX.Element {
   const theme = {
