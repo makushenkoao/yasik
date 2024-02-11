@@ -61,7 +61,13 @@ export const MovieDetails = () => {
               {new Date(movie.release_date).getFullYear()}
             </Text>
             <Text style={styles.detailText}>|</Text>
-            <Text style={styles.detailText}>{movie.vote_average}</Text>
+            <Text style={styles.detailText}>
+              {Math.round(movie.vote_average)}
+            </Text>
+            <Image
+              source={require('@shared/assets/images/star.png')}
+              style={{width: 18, height: 18, tintColor: '#adaa06'}}
+            />
           </View>
           <Button
             title="Show Video"
@@ -87,7 +93,11 @@ export const MovieDetails = () => {
         onRequestClose={onCloseModal}>
         <View style={styles.modalWrapper}>
           <View style={styles.modalContainer}>
-            <Button title="Close" onPress={onCloseModal} color={Colors.HIGHLIGHT} />
+            <Button
+              title="Close"
+              onPress={onCloseModal}
+              color={Colors.HIGHLIGHT}
+            />
             <ScrollView contentContainerStyle={styles.scroll}>
               <View style={styles.modalContent}>
                 <WebView

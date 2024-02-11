@@ -14,9 +14,6 @@ import {UserProvider} from '@app/providers/user/UserProvider';
 //  swipeable modal in activity screen
 //  add to fav movie
 //  подстраивать клавиатуру под инпут при фокусе
-//  share random movie
-//  share activity
-//  star icons in movie details
 
 function App(): React.JSX.Element {
   const theme = {
