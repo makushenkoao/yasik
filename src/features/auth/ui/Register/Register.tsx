@@ -22,17 +22,46 @@ export const Register = (props: RegisterProps) => {
   const {onSubmit, setLoginScreen, loading} = props;
 
   const [inputs, setInputs] = useState<RegisterData>({...initialState});
+  const [errors, setErrors] = useState<Partial<Record<RegisterField, string>>>(
+    {},
+  );
+
+  const onRegister = () => {
+    const {name, email, password} = inputs;
+    const newErrors: Partial<Record<RegisterField, string>> = {};
+
+    if (name.length < 3) {
+      newErrors.name = 'Name should be at least 3 characters long';
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      newErrors.email = 'Invalid email address';
+    }
+
+    if (password.length < 6) {
+      newErrors.password = 'Password should be at least 6 characters long';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+    } else {
+      onSubmit(inputs);
+      setInputs({...initialState});
+      setErrors({});
+    }
+  };
 
   const handleChange = (name: RegisterField, value: string) => {
+    setErrors(prevState => ({
+      ...prevState,
+      [name]: '',
+    }));
+
     setInputs(prevState => ({
       ...prevState,
       [name]: value,
     }));
-  };
-
-  const onRegister = () => {
-    onSubmit(inputs);
-    setInputs({...initialState});
   };
 
   return (
@@ -42,6 +71,7 @@ export const Register = (props: RegisterProps) => {
         variant="outlined"
         value={inputs.name}
         onChangeText={text => handleChange('name', text)}
+        error={errors.name}
       />
       <Input
         placeholder="Enter Email"
@@ -50,6 +80,7 @@ export const Register = (props: RegisterProps) => {
         variant="outlined"
         value={inputs.email}
         onChangeText={text => handleChange('email', text)}
+        error={errors.email}
       />
       <PasswordInput
         placeholder="Enter Password"
@@ -57,6 +88,7 @@ export const Register = (props: RegisterProps) => {
         variant="outlined"
         value={inputs.password}
         onChangeText={text => handleChange('password', text)}
+        error={errors.password}
       />
       <View>
         <Button content="Sign Up" onPress={onRegister} loading={loading} />

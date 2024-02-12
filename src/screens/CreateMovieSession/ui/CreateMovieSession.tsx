@@ -31,8 +31,16 @@ export const CreateMovieSession = (props: CreateSessionScreenProps) => {
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [order, setOrder] = useState<Order>('default');
+  const [isError, setIsError] = useState(false);
 
   const handleCreateToSession = () => {
+    if (selectedGenres.length === 0) {
+      setIsError(true);
+      return;
+    }
+
+    setIsError(false);
+
     navigation.navigate('StartSession');
   };
 
@@ -41,6 +49,8 @@ export const CreateMovieSession = (props: CreateSessionScreenProps) => {
   };
 
   const handleSelectGenre = (id: number) => {
+    setIsError(false);
+
     setSelectedGenres(prevState => {
       const isIdAlreadySelected = prevState.includes(id);
 
@@ -102,8 +112,9 @@ export const CreateMovieSession = (props: CreateSessionScreenProps) => {
       </ScrollView>
       <View style={styles.container}>
         <Button
-          // loading={loading}
-          content="Continue"
+          disabled={isError}
+          content={isError ? 'Select a Genre' : 'Continue'}
+          variant={isError ? 'error' : 'primary'}
           onPress={handleCreateToSession}
         />
       </View>

@@ -36,7 +36,7 @@ export const Button = memo((props: ButtonProps) => {
       style={[
         styles.container,
         styles[variant],
-        disabled && styles.disabled,
+        disabled && variant === 'primary' && styles.disabled,
         loading && styles.disabled,
         style,
       ]}

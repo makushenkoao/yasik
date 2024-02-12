@@ -9,7 +9,8 @@ export default StyleSheet.create({
   wrapper: {
     alignItems: 'center',
     backgroundColor: Colors.SECONDARY,
-    borderRadius: 50,
+    borderBottomRightRadius: 50,
+    borderBottomLeftRadius: 50,
     overflow: 'hidden',
   },
   textContainer: {

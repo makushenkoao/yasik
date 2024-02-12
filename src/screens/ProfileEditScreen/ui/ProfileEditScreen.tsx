@@ -8,12 +8,18 @@ import styles from './styles.ts';
 
 export const ProfileEditScreen = () => {
   const [name, setName] = useState('Your Name');
+  const [error, setError] = useState('');
 
   const onSave = () => {
+    if (name.length <= 3) {
+      setError('Enter a name with more than 3 letters');
+      return;
+    }
     console.log('Save');
   };
 
   const onChangeName = (value: string) => {
+    setError('');
     setName(value);
   };
 
@@ -26,8 +32,9 @@ export const ProfileEditScreen = () => {
             variant="outlined"
             value={name}
             onChangeText={onChangeName}
+            error={error}
           />
-          <Button content="Save Changes" onPress={onSave} />
+          <Button content="Save" onPress={onSave} />
         </View>
       </Container>
     </Screen>

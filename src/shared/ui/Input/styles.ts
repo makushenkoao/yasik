@@ -19,13 +19,16 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.ACCENT,
   },
-  multiline: {
-    height: 80,
-    paddingVertical: 14,
-  },
   password: {
     paddingVertical: 14,
     paddingLeft: 24,
     paddingRight: 42,
+  },
+  error: {
+    borderColor: Colors.IMPORTANT,
+  },
+  errorMessage: {
+    color: Colors.IMPORTANT,
+    marginTop: 5,
   },
 });
