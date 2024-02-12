@@ -28,7 +28,9 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const toast = useToast();
 
-  const handleStartSession = () => {};
+  const handleStartSession = () => {
+    navigation.navigate('Movie');
+  };
   const handleInvite = () => {
     const message = 'Join my session with code "MOCK_CODE".';
 
@@ -72,7 +74,7 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
       <Header />
       <ImageBackground
         source={{
-          uri: 'https://image.tmdb.org/t/p/w500/gh4cZbhZxyTbgxQPxD0dOudNPTn.jpg',
+          uri: 'https://image.tmdb.org/t/p/original/jHxCeXnSchAuwHnmVatTgqMYdX8.jpg',
         }}
         style={styles.imageBackground}>
         <View style={styles.imageBackgroundContent}>

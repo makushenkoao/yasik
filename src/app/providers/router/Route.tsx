@@ -11,6 +11,10 @@ import {MovieDetails} from '@screens/MovieDetails';
 import {ConnectToSessionScreen} from '@screens/ConnectToSessionScreen';
 import {CreateMovieSession} from '@screens/CreateMovieSession';
 import {StartSessionScreen} from '@screens/StartSessionScreen';
+import {MovieScreen} from '@screens/MovieScreen';
+import {MatchesScreen} from '@screens/MatchesScreen';
+import {MatchesDetailsScreen} from '@screens/MatchesDetailsScreen';
+import {EndSessionScreen} from '@screens/EndSessionScreen';
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -60,6 +64,26 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="StartSession"
       component={StartSessionScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="Movie"
+      component={MovieScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="Matches"
+      component={MatchesScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="MatchesDetails"
+      component={MatchesDetailsScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="EndSession"
+      component={EndSessionScreen}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>

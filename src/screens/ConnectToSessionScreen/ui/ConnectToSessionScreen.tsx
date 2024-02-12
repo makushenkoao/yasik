@@ -15,7 +15,7 @@ export const ConnectToSessionScreen = () => {
     <Screen>
       <ImageBackground
         source={{
-          uri: 'https://image.tmdb.org/t/p/w500/jlJ8nDhMhCYJuzOw3f52CP1W8MW.jpg\n',
+          uri: 'https://image.tmdb.org/t/p/original/wu1uilmhM4TdluKi2ytfz8gidHf.jpg',
         }}
         style={styles.imageBackground}
       />

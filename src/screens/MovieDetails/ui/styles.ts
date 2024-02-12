@@ -77,4 +77,9 @@ export default StyleSheet.create({
     backgroundColor: 'black',
   },
   starIcon: {width: 18, height: 18, tintColor: '#adaa06'},
+  countries: {
+    color: Colors.TEXT,
+    paddingVertical: 10,
+    textAlign: 'center',
+  },
 });

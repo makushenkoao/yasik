@@ -23,7 +23,7 @@ export const MoviePoster = (props: MoviePosterProps) => {
     <TouchableOpacity activeOpacity={0.7} onPress={onNavigate}>
       <ImageBackground
         source={{
-          uri: `https://image.tmdb.org/t/p/w500${poster_path}`,
+          uri: `https://image.tmdb.org/t/p/original${poster_path}`,
         }}
         style={styles.imageBackground}>
         <Text numberOfLines={2} ellipsizeMode="tail" style={styles.title}>

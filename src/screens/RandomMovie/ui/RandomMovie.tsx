@@ -5,11 +5,17 @@ import {Screen} from '@widgets/Screen';
 import {Text, View, Button as RNButton, Share} from 'react-native';
 import {Emoji} from '@shared/ui/Emoji';
 import {Colors} from '@shared/const/colors.ts';
-import {getRandomMovie, Movie, MoviePoster} from '@entities/Movie';
+import {
+  getMovieImages,
+  getRandomMovie,
+  Movie,
+  MoviePoster,
+} from '@entities/Movie';
 import styles from './styles.ts';
 
 export const RandomMovie = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
+  const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -19,11 +25,12 @@ export const RandomMovie = () => {
       .then(data => {
         setMovie(data);
         setLoading(false);
+        getMovieImages(data.id).then(imageData =>
+          setImage(imageData.backdrops[0]?.file_path),
+        );
       })
       .catch(() => {
         setError('An error occurred while fetching the random movie.');
-      })
-      .finally(() => {
         setLoading(false);
       });
   };
@@ -54,6 +61,8 @@ export const RandomMovie = () => {
       .catch(err => console.error('Failed to share:', err));
   };
 
+  console.log(image);
+
   return (
     <Screen>
       {!movie && (
@@ -66,7 +75,7 @@ export const RandomMovie = () => {
         <MoviePoster
           id={movie.id}
           title={movie.title}
-          poster_path={movie.poster_path}
+          poster_path={image || movie.poster_path}
         />
       )}
       <Container>

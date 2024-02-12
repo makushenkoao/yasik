@@ -44,7 +44,7 @@ export const getMovieDetails = async (id: string) => {
   }
 };
 
-export const getMovieImages = async (id: string) => {
+export const getMovieImages = async (id?: number) => {
   try {
     const response = await axios.get(
       `${config.THEMOVIEDB_URL}/movie/${id}/images`,

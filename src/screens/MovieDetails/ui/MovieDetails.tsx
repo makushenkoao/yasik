@@ -13,12 +13,14 @@ import {Colors} from '@shared/const/colors.ts';
 import {Header} from '@widgets/Header';
 import {
   getMovieDetails,
+  getMovieImages,
   getMovieTrailer,
   MovieDetails as IMovieDetails,
   MovieVideo,
 } from '@entities/Movie';
 import WebView from 'react-native-webview';
 import styles from './styles.ts';
+import {MovieDetailsPoster} from '@screens/MovieDetails/ui/MovieDetailsPoster.tsx';
 
 export const MovieDetails = () => {
   const route = useRoute();
@@ -30,10 +32,12 @@ export const MovieDetails = () => {
   const [movie, setMovie] = useState<IMovieDetails | null>(null);
   const [video, setVideo] = useState<MovieVideo | null>(null);
   const [isShowVideo, setIsShowVideo] = useState(false);
+  const [image, setImage] = useState('');
 
   useEffect(() => {
     getMovieDetails(id).then(setMovie);
     getMovieTrailer(id).then(setVideo);
+    getMovieImages(id).then(data => setImage(data.backdrops[0]?.file_path));
   }, [id]);
 
   const onOpenModal = () => {
@@ -51,33 +55,16 @@ export const MovieDetails = () => {
   return (
     <View style={styles.wrapper}>
       <Header />
-      <ImageBackground
-        source={{
-          uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
-        }}
-        style={styles.imageBackground}>
-        <View style={styles.overlay}>
-          <Text style={styles.title}>{movie.title}</Text>
-          <View style={styles.details}>
-            <Text style={styles.detailText}>
-              {new Date(movie.release_date).getFullYear()}
-            </Text>
-            <Text style={styles.detailText}>|</Text>
-            <Text style={styles.detailText}>
-              {Math.round(movie.vote_average)}
-            </Text>
-            <Image
-              source={require('@shared/assets/images/star.png')}
-              style={styles.starIcon}
-            />
-          </View>
-          <Button
-            title="Show Movie Trailer"
-            onPress={onOpenModal}
-            color={Colors.HIGHLIGHT}
-          />
-        </View>
-      </ImageBackground>
+      {movie && (
+        <MovieDetailsPoster
+          title={movie.title}
+          img={image || movie.poster_path}
+          onOpenModal={onOpenModal}
+          releaseDate={movie.release_date}
+          voteAverage={movie.vote_average}
+          countries={movie.production_countries}
+        />
+      )}
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.container}>
           <View style={styles.genreContainer}>

@@ -7,6 +7,8 @@ import {UserProvider} from '@app/providers/user/UserProvider';
 
 // TODO:
 //  fix lint
+//  handle errors
+//  handle loading
 //  validation forms
 //  input type error, disabled
 //  create session, connect session screens
@@ -18,6 +20,8 @@ import {UserProvider} from '@app/providers/user/UserProvider';
 //  matches history
 //  matches details
 //  api
+//  movie trailer component
+//  remove margin in button
 
 function App(): React.JSX.Element {
   const theme = {

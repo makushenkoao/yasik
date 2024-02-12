@@ -67,7 +67,7 @@ export const CreateMovieSession = (props: CreateSessionScreenProps) => {
       <Header />
       <ImageBackground
         source={{
-          uri: 'https://image.tmdb.org/t/p/w500/ln7DqfqyKosTw1xoa92Q7FRT3Jh.jpg',
+          uri: 'https://image.tmdb.org/t/p/original/gnkBzJVH2zicIopP2fHf4kRElne.jpg',
         }}
         style={styles.imageBackground}
       />

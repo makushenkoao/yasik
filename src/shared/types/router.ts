@@ -8,5 +8,6 @@ export interface RootParamList {
   CreateMovieSession: undefined;
   ConnectMovieSession: undefined;
   StartSession: undefined;
+  EndSession: undefined;
   [key: string]: any;
 }
