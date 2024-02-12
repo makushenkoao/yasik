@@ -15,6 +15,14 @@ interface StepOneProps {
 export const StepOne = (props: StepOneProps) => {
   const {selectedType, onChangeSelectedType, handleContinue} = props;
 
+  const getTypeBackground = (item: ActivityType) => {
+    const isActive = item === selectedType;
+
+    return {
+      backgroundColor: isActive ? Colors.ACCENT : 'transparent',
+    };
+  };
+
   return (
     <>
       <View>
@@ -26,13 +34,7 @@ export const StepOne = (props: StepOneProps) => {
             <TouchableOpacity
               key={item}
               onPress={() => onChangeSelectedType(item)}
-              style={[
-                styles.typeBlock,
-                {
-                  backgroundColor:
-                    item === selectedType ? Colors.ACCENT : Colors.BACKGROUND,
-                },
-              ]}>
+              style={[styles.typeBlock, getTypeBackground(item)]}>
               <Text style={styles.text}>{item}</Text>
             </TouchableOpacity>
           ))}

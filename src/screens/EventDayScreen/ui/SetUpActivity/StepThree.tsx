@@ -10,7 +10,7 @@ interface StepThreeProps {
   minprice: string;
   maxprice: string;
   handleBack: () => void;
-  getFilteredActivity: () => void;
+  findActivity: () => void;
 }
 
 export const StepThree = (props: StepThreeProps) => {
@@ -19,7 +19,7 @@ export const StepThree = (props: StepThreeProps) => {
     onChangeMaxprice,
     maxprice,
     minprice,
-    getFilteredActivity,
+    findActivity,
     handleBack,
   } = props;
 
@@ -44,11 +44,7 @@ export const StepThree = (props: StepThreeProps) => {
       </View>
       <View style={styles.buttonsWrapper}>
         <Button style={styles.button} content="Back" onPress={handleBack} />
-        <Button
-          style={styles.button}
-          content="Save Filters"
-          onPress={getFilteredActivity}
-        />
+        <Button style={styles.button} content="Find" onPress={findActivity} />
       </View>
     </>
   );

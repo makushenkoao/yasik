@@ -9,6 +9,10 @@ export default StyleSheet.create({
     backgroundColor: Colors.BORDER,
     padding: 15,
   },
+  activityLoadingWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   activityTitle: {
     color: Colors.TEXT,
     fontSize: 16,

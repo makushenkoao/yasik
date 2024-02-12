@@ -32,35 +32,34 @@ export default StyleSheet.create({
   gap10: {
     gap: 10,
   },
-  modalWrapper: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-  modalContent: {
-    height: '100%',
-    justifyContent: 'space-between',
-    position: 'relative',
-  },
-  modalContainer: {
-    height: 400,
-    backgroundColor: Colors.BACKGROUND,
-    borderTopColor: Colors.BORDER,
-    borderWidth: 2,
-    paddingHorizontal: 24,
-    paddingVertical: 30,
-    position: 'relative',
-  },
   scroll: {
     flexGrow: 1,
   },
-  closeButtonWrapper: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
+  // BottmSheet
+  bottomSheetIndicator: {
+    backgroundColor: '#fff',
   },
-  closeButton: {
-    width: 30,
-    height: 30,
-    tintColor: Colors.ACCENT,
+  bottomSheetTitle: {
+    fontSize: 18,
+    color: Colors.TEXT,
+    textAlign: 'center',
+  },
+  bottomSheetWrapper: {
+    flex: 1,
+  },
+  bottomSheetContainer: {
+    paddingTop: 40,
+    height: '100%',
+    justifyContent: 'space-between',
+    paddingHorizontal: 24,
+    paddingBottom: 60,
+  },
+  bottomDescription: {
+    color: Colors.TEXT,
+    fontSize: 15,
+    lineHeight: 20,
+  },
+  bottomSheetBackground: {
+    backgroundColor: '#222',
   },
 });
