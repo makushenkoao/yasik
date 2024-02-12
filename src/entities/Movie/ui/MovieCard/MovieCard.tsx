@@ -23,7 +23,7 @@ export const MovieCard = (props: MovieCardProps) => {
     <TouchableOpacity activeOpacity={0.7} onPress={handleClick}>
       <ImageBackground
         source={{
-          uri: `https://image.tmdb.org/t/p/w500${img}`,
+          uri: `https://image.tmdb.org/t/p/original${img}`,
         }}
         style={styles.imageBackground}>
         <Text numberOfLines={2} ellipsizeMode="tail" style={styles.text}>

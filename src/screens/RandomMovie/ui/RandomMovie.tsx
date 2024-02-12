@@ -61,8 +61,6 @@ export const RandomMovie = () => {
       .catch(err => console.error('Failed to share:', err));
   };
 
-  console.log(image);
-
   return (
     <Screen>
       {!movie && (

@@ -9,5 +9,7 @@ export interface RootParamList {
   ConnectMovieSession: undefined;
   StartSession: undefined;
   EndSession: undefined;
+  Matches: undefined;
+  MatchesDetails: undefined;
   [key: string]: any;
 }

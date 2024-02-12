@@ -19,7 +19,7 @@ export default StyleSheet.create({
     borderWidth: 1,
   },
   text: {
-    fontSize: 16,
+    fontSize: 18,
     color: Colors.TEXT,
   },
   textBold: {

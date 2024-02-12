@@ -1,9 +1,10 @@
 import {Screen} from '@widgets/Screen';
-import {Text, View, Button as RNButton} from 'react-native';
+import {Button as RNButton, Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '@shared/types/router.ts';
 import {Button} from '@shared/ui/Button';
 import {Colors} from '@shared/const/colors.ts';
+import styles from './styles.ts';
 
 interface EndSessionProps {
   navigation: StackNavigationProp<RootParamList, 'EndSession'>;
@@ -18,21 +19,8 @@ export const EndSessionScreen = (props: EndSessionProps) => {
 
   return (
     <Screen>
-      <View
-        style={{
-          height: '100%',
-          justifyContent: 'center',
-          paddingHorizontal: 24,
-          gap: 10,
-        }}>
-        <Text
-          style={{
-            fontSize: 20,
-            color: Colors.TEXT,
-            textAlign: 'center',
-            lineHeight: 30,
-            paddingHorizontal: 30,
-          }}>
+      <View style={styles.container}>
+        <Text style={styles.title}>
           We've run out of genres and selections you've chosen 🤯
         </Text>
         <Button content="Go to Matches" onPress={() => onNavigate('Matches')} />

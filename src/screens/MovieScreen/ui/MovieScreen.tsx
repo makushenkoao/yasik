@@ -1,17 +1,27 @@
 import {
   Image,
   ImageBackground,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Colors} from '@shared/const/colors.ts';
 import {Button} from '@shared/ui/Button';
 import {Header} from '@widgets/Header';
+import {useState} from 'react';
+import {VideoTrailer} from '@features/videoTrailer';
+import {Overview} from '@screens/MovieScreen/ui/Overview.tsx';
+import styles from './styles.ts';
 
 export const MovieScreen = () => {
-  const onOpenTrailer = () => {};
+  const [showVideo, setShowVideo] = useState(false);
+
+  const openVideo = () => {
+    setShowVideo(true);
+  };
+
+  const closeVideo = () => {
+    setShowVideo(false);
+  };
 
   return (
     <>
@@ -35,7 +45,7 @@ export const MovieScreen = () => {
         </View>
         <View style={styles.container}>
           <Button
-            onPress={onOpenTrailer}
+            onPress={openVideo}
             content="Watch Movie Trailer"
             style={styles.mb10}
           />
@@ -51,68 +61,15 @@ export const MovieScreen = () => {
               <Text style={styles.buttonText}>Want</Text>
             </TouchableOpacity>
           </View>
-          <Text>Info</Text>
         </View>
+        <Overview />
       </ImageBackground>
+      {showVideo && (
+        <VideoTrailer
+          videoUrl="https://www.youtube.com/watch?v=wXp-lj9luJU"
+          onClose={closeVideo}
+        />
+      )}
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  mb12: {marginBottom: 12},
-  mb5: {marginBottom: 5},
-  mb10: {marginBottom: 10},
-  title: {
-    fontSize: 20,
-    color: Colors.HEADER,
-    fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 15,
-    color: Colors.HEADER,
-  },
-  btnWrapper: {
-    flexDirection: 'row',
-    gap: 10,
-  },
-  container: {
-    paddingHorizontal: 24,
-    paddingBottom: 60,
-  },
-  imageBackground: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'flex-end',
-  },
-  button: {
-    flex: 1,
-    padding: 12,
-    borderRadius: 16,
-  },
-  buttonText: {
-    fontSize: 18,
-    color: Colors.HEADER,
-    textAlign: 'center',
-  },
-  done: {
-    backgroundColor: Colors.SUCCESS,
-  },
-  cancel: {
-    backgroundColor: Colors.IMPORTANT,
-  },
-  rateWrapper: {
-    flexDirection: 'row',
-    gap: 5,
-    alignItems: 'center',
-  },
-  starIcon: {
-    width: 18,
-    height: 18,
-    tintColor: Colors.HIGHLIGHT,
-  },
-  infoWrapper: {
-    backgroundColor: 'rgba(0,0,0,0.7)',
-    paddingVertical: 12,
-    paddingHorizontal: 24,
-  },
-});

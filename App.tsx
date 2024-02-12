@@ -6,22 +6,15 @@ import {Colors} from '@shared/const/colors';
 import {UserProvider} from '@app/providers/user/UserProvider';
 
 // TODO:
-//  fix lint
 //  handle errors
 //  handle loading
 //  validation forms
 //  input type error, disabled
-//  create session, connect session screens
-//  matches screens
-//  swipeable modal in activity screen
+//  remake activity set up from modal to bottm sheet
 //  add to fav movie
-//  подстраивать клавиатуру под инпут при фокусе
-//  movie swipe
-//  matches history
-//  matches details
-//  api
-//  movie trailer component
-//  remove margin in button
+//  focus input keyboard
+//  remake movie trailer component
+//  API
 
 function App(): React.JSX.Element {
   const theme = {

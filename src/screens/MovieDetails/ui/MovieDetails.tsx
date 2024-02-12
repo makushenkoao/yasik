@@ -1,15 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Button,
-  Image,
-  ImageBackground,
-  Modal,
-  ScrollView,
-  Text,
-  View,
-} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
-import {Colors} from '@shared/const/colors.ts';
 import {Header} from '@widgets/Header';
 import {
   getMovieDetails,
@@ -18,9 +9,9 @@ import {
   MovieDetails as IMovieDetails,
   MovieVideo,
 } from '@entities/Movie';
-import WebView from 'react-native-webview';
 import styles from './styles.ts';
 import {MovieDetailsPoster} from '@screens/MovieDetails/ui/MovieDetailsPoster.tsx';
+import {VideoTrailer} from '@features/videoTrailer';
 
 export const MovieDetails = () => {
   const route = useRoute();
@@ -77,32 +68,12 @@ export const MovieDetails = () => {
           <Text style={styles.text}>{movie.overview}</Text>
         </View>
       </ScrollView>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={isShowVideo}
-        onRequestClose={onCloseModal}>
-        <View style={styles.modalWrapper}>
-          <View style={styles.modalContainer}>
-            <Button
-              title="Close"
-              onPress={onCloseModal}
-              color={Colors.HIGHLIGHT}
-            />
-            <ScrollView contentContainerStyle={styles.scroll}>
-              <View style={styles.modalContent}>
-                <WebView
-                  allowsFullscreenVideo
-                  source={{
-                    uri: `https://www.youtube.com/watch?v=${video?.results[0]?.key}`,
-                  }}
-                  style={styles.webview}
-                />
-              </View>
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
+      {isShowVideo && (
+        <VideoTrailer
+          videoUrl={`https://www.youtube.com/watch?v=${video?.results[0]?.key}`}
+          onClose={onCloseModal}
+        />
+      )}
     </View>
   );
 };

@@ -42,10 +42,6 @@ export const HomeScreen = (props: HomeScreenProps) => {
           content="Boredom Buster ⚡"
           onPress={() => onNavigate('EventDay')}
         />
-        <Button
-          content="Test"
-          onPress={() => onNavigate('EndSession')}
-        />
       </Container>
     </ScrollView>
   );
