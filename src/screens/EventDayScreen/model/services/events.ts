@@ -1,8 +1,5 @@
 import axios from 'axios';
-import {
-  Activity,
-  ActivityType,
-} from '@screens/EventDayScreen/ui/EventDayScreen.tsx';
+import {Activity, ActivityType} from '../types/event.ts';
 
 interface GetFilteredActivityArgs {
   type: ActivityType | null;

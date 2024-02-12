@@ -1,6 +1,11 @@
 import React from 'react';
-import {Button, Image, ImageBackground, Text, View} from 'react-native';
-import {Colors} from '@shared/const/colors.ts';
+import {
+  Image,
+  ImageBackground,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from '../ui/styles.ts';
 
 interface MovieDetailsPosterProps {
@@ -8,7 +13,7 @@ interface MovieDetailsPosterProps {
   voteAverage: number;
   title: string;
   img: string | null;
-  onOpenModal: () => void;
+  handleOpenVideo: () => void;
   countries: {
     iso_3166_1: string;
     name: string;
@@ -16,7 +21,8 @@ interface MovieDetailsPosterProps {
 }
 
 export const MovieDetailsPoster = (props: MovieDetailsPosterProps) => {
-  const {releaseDate, img, voteAverage, onOpenModal, title, countries} = props;
+  const {releaseDate, img, voteAverage, handleOpenVideo, title, countries} =
+    props;
 
   return (
     <ImageBackground
@@ -47,11 +53,16 @@ export const MovieDetailsPoster = (props: MovieDetailsPosterProps) => {
               ))
             : countries[0].name}
         </Text>
-        <Button
-          title="Show Movie Trailer"
-          onPress={onOpenModal}
-          color={Colors.HIGHLIGHT}
-        />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={handleOpenVideo}
+          style={styles.trailerButton}>
+          <Text style={styles.trailerButtonText}>Trailer</Text>
+          <Image
+            source={require('@shared/assets/images/play.png')}
+            style={styles.trailerButtonIcon}
+          />
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );

@@ -82,4 +82,22 @@ export default StyleSheet.create({
     paddingVertical: 10,
     textAlign: 'center',
   },
+  trailerButton: {
+    flexDirection: 'row',
+    gap: 5,
+    alignItems: 'center',
+    backgroundColor: Colors.HIGHLIGHT,
+    borderRadius: 12,
+    padding: 10,
+    justifyContent: 'center',
+  },
+  trailerButtonText: {
+    fontSize: 18,
+    color: Colors.BACKGROUND,
+  },
+  trailerButtonIcon: {
+    tintColor: Colors.BACKGROUND,
+    width: 20,
+    height: 20,
+  },
 });

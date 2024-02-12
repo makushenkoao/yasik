@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useRef} from 'react';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {Text, View} from 'react-native';
 import {StepOne} from './StepOne.tsx';
@@ -40,11 +40,7 @@ export const SetUpActivity = (props: SetUpActivityProps) => {
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const snapPoints = useMemo(() => ['10%', '50%'], []);
-
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  const snapPoints = ['10%', '50%'];
 
   const findActivity = () => {
     onGetFilteredActivity();
@@ -90,7 +86,6 @@ export const SetUpActivity = (props: SetUpActivityProps) => {
       index={0}
       handleIndicatorStyle={styles.bottomSheetIndicator}
       snapPoints={snapPoints}
-      onChange={handleSheetChanges}
       backgroundStyle={styles.bottomSheetBackground}>
       <View style={styles.bottomSheetWrapper}>
         <Text style={styles.bottomSheetTitle}>Set Up Activity</Text>

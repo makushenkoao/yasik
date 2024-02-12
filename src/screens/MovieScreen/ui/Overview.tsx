@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useRef} from 'react';
+import React, {useMemo, useRef} from 'react';
 import {Text, View} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import styles from './styles.ts';
@@ -8,17 +8,12 @@ export const Overview = () => {
 
   const snapPoints = useMemo(() => ['10%', '50%'], []);
 
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log('handleSheetChanges', index);
-  }, []);
-
   return (
     <BottomSheet
       ref={bottomSheetRef}
       index={0}
       handleIndicatorStyle={styles.bottomSheetIndicator}
       snapPoints={snapPoints}
-      onChange={handleSheetChanges}
       backgroundStyle={styles.bottomSheetBackground}>
       <View style={styles.bottomSheetWrapper}>
         <Text style={styles.bottomSheetTitle}>Overview</Text>

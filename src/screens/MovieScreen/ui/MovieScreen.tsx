@@ -5,22 +5,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Button} from '@shared/ui/Button';
 import {Header} from '@widgets/Header';
-import {useState} from 'react';
-import {VideoTrailer} from '@features/videoTrailer';
+import React, {useRef} from 'react';
+import {VideoTrailer} from '@features/trailer';
 import {Overview} from '@screens/MovieScreen/ui/Overview.tsx';
 import styles from './styles.ts';
+import BottomSheet from '@gorhom/bottom-sheet';
 
 export const MovieScreen = () => {
-  const [showVideo, setShowVideo] = useState(false);
+  const bottomSheetRef = useRef<BottomSheet>(null);
 
-  const openVideo = () => {
-    setShowVideo(true);
-  };
+  const snapPoints = [0.1, '80%'];
 
-  const closeVideo = () => {
-    setShowVideo(false);
+  const handleOpenVideo = () => {
+    bottomSheetRef?.current?.expand();
   };
 
   return (
@@ -31,24 +29,21 @@ export const MovieScreen = () => {
           uri: 'https://image.tmdb.org/t/p/original/oihWVx3imvRKujnGmSDYhfG1gI5.jpg',
         }}
         style={styles.imageBackground}>
-        <View style={styles.infoWrapper}>
-          <Text style={[styles.title, styles.mb10]}>Movie Name</Text>
-          <View style={[styles.rateWrapper, styles.mb10]}>
-            <Text style={styles.text}>8</Text>
+        <View style={[styles.infoWrapper, styles.mb10]}>
+          <Text style={[styles.title, styles.mb10]}>Movie Name | 2006</Text>
+          <Text style={[styles.text, styles.mb10]}>Comedy | Horror</Text>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={handleOpenVideo}
+            style={styles.trailerButton}>
+            <Text style={styles.trailerButtonText}>Trailer</Text>
             <Image
-              style={styles.starIcon}
-              source={require('@shared/assets/images/star.png')}
+              source={require('@shared/assets/images/play.png')}
+              style={styles.trailerButtonIcon}
             />
-          </View>
-          <Text style={[styles.text, styles.mb10]}>Year</Text>
-          <Text style={[styles.text, styles.mb10]}>Comedy</Text>
+          </TouchableOpacity>
         </View>
         <View style={styles.container}>
-          <Button
-            onPress={openVideo}
-            content="Watch Movie Trailer"
-            style={styles.mb10}
-          />
           <View style={styles.btnWrapper}>
             <TouchableOpacity
               activeOpacity={0.7}
@@ -64,12 +59,11 @@ export const MovieScreen = () => {
         </View>
         <Overview />
       </ImageBackground>
-      {showVideo && (
-        <VideoTrailer
-          videoUrl="https://www.youtube.com/watch?v=wXp-lj9luJU"
-          onClose={closeVideo}
-        />
-      )}
+      <VideoTrailer
+        snapPoints={snapPoints}
+        bottomSheetRef={bottomSheetRef}
+        uri="wXp-lj9luJU"
+      />
     </>
   );
 };

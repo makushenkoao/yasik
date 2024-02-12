@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {Header} from '@widgets/Header';
@@ -11,7 +11,8 @@ import {
 } from '@entities/Movie';
 import styles from './styles.ts';
 import {MovieDetailsPoster} from '@screens/MovieDetails/ui/MovieDetailsPoster.tsx';
-import {VideoTrailer} from '@features/videoTrailer';
+import BottomSheet from '@gorhom/bottom-sheet';
+import {VideoTrailer} from '@features/trailer';
 
 export const MovieDetails = () => {
   const route = useRoute();
@@ -22,22 +23,21 @@ export const MovieDetails = () => {
 
   const [movie, setMovie] = useState<IMovieDetails | null>(null);
   const [video, setVideo] = useState<MovieVideo | null>(null);
-  const [isShowVideo, setIsShowVideo] = useState(false);
   const [image, setImage] = useState('');
+
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  const snapPoints = [0.1, '80%'];
+
+  const handleOpenVideo = () => {
+    bottomSheetRef?.current?.expand();
+  };
 
   useEffect(() => {
     getMovieDetails(id).then(setMovie);
     getMovieTrailer(id).then(setVideo);
     getMovieImages(id).then(data => setImage(data.backdrops[0]?.file_path));
   }, [id]);
-
-  const onOpenModal = () => {
-    setIsShowVideo(true);
-  };
-
-  const onCloseModal = () => {
-    setIsShowVideo(false);
-  };
 
   if (!movie || !video) {
     return null;
@@ -50,7 +50,7 @@ export const MovieDetails = () => {
         <MovieDetailsPoster
           title={movie.title}
           img={image || movie.poster_path}
-          onOpenModal={onOpenModal}
+          handleOpenVideo={handleOpenVideo}
           releaseDate={movie.release_date}
           voteAverage={movie.vote_average}
           countries={movie.production_countries}
@@ -68,12 +68,11 @@ export const MovieDetails = () => {
           <Text style={styles.text}>{movie.overview}</Text>
         </View>
       </ScrollView>
-      {isShowVideo && (
-        <VideoTrailer
-          videoUrl={`https://www.youtube.com/watch?v=${video?.results[0]?.key}`}
-          onClose={onCloseModal}
-        />
-      )}
+      <VideoTrailer
+        snapPoints={snapPoints}
+        bottomSheetRef={bottomSheetRef}
+        uri={video?.results[0]?.key}
+      />
     </View>
   );
 };
