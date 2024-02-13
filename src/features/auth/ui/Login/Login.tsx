@@ -36,7 +36,7 @@ export const Login = (props: LoginProps) => {
   return (
     <View style={styles.container}>
       <Input
-        placeholder="Enter Nickname"
+        placeholder="Enter Email"
         variant="outlined"
         value={inputs.email}
         autoCapitalize="none"

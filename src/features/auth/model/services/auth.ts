@@ -1,11 +1,11 @@
 import {LoginData, RegisterData} from '../types/auth.ts';
-import axios from 'axios';
+import {$api} from '@shared/api/api.ts';
 
 export const login = async (props: LoginData) => {
   const {email, password} = props;
 
   try {
-    const response = await axios.post('http://localhost:8000/login', {
+    const response = await $api.post('auth/login', {
       email,
       password,
     });
@@ -20,7 +20,7 @@ export const register = async (props: RegisterData) => {
   const {name, email, password} = props;
 
   try {
-    const response = await axios.post('http://localhost:8000/register', {
+    const response = await $api.post('auth/register', {
       name,
       email,
       password,
@@ -28,6 +28,6 @@ export const register = async (props: RegisterData) => {
 
     return response.data;
   } catch (error) {
-    console.error('Register Errror:', error);
+    console.error('Register Error:', error);
   }
 };

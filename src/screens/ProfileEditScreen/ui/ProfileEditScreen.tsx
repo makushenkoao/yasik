@@ -5,9 +5,20 @@ import {Screen} from '@widgets/Screen/ui/Screen.tsx';
 import {Input} from '@shared/ui/Input';
 import {Button} from '@shared/ui/Button';
 import styles from './styles.ts';
+import {useUser} from '@app/providers/user/UserProvider.tsx';
+import {updateUser} from '@entities/User';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {RootParamList} from '@shared/types/router.ts';
 
-export const ProfileEditScreen = () => {
-  const [name, setName] = useState('Your Name');
+interface ProfileEditScreenProps {
+  navigation: StackNavigationProp<RootParamList, 'ProfileEdit'>;
+}
+
+export const ProfileEditScreen = (props: ProfileEditScreenProps) => {
+  const {navigation} = props;
+
+  const {user, setData} = useUser();
+  const [name, setName] = useState(user?.name || '');
   const [error, setError] = useState('');
 
   const onSave = () => {
@@ -15,7 +26,13 @@ export const ProfileEditScreen = () => {
       setError('Enter a name with more than 3 letters');
       return;
     }
-    console.log('Save');
+
+    updateUser({
+      id: user?._id,
+      name,
+    }).then(user => setData(user));
+
+    navigation.navigate('Profile');
   };
 
   const onChangeName = (value: string) => {

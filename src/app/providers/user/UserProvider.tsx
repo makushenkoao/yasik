@@ -6,17 +6,17 @@ import React, {
   useState,
 } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {User, getUserDataByToken} from '@entities/User';
 
-export interface User {
-  name: string;
-  email: string;
-  id: string;
-  password: string;
+interface LoginArgs {
+  user: User;
+  token: string;
 }
 
 interface ContextType {
   user: User | null;
-  login: (userData: User) => void;
+  login: (args: LoginArgs) => void;
+  setData: (user: User) => void;
   logout: () => void;
 }
 
@@ -24,6 +24,7 @@ const UserContext = createContext<ContextType>({
   user: null,
   login: () => {},
   logout: () => {},
+  setData: () => {},
 });
 
 export const useUser = () => {
@@ -40,9 +41,9 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
   useEffect(() => {
     const loadUser = async () => {
       try {
-        const userData = await AsyncStorage.getItem('userData');
-        if (userData) {
-          setUser(JSON.parse(userData));
+        const token = await AsyncStorage.getItem('userToken');
+        if (token) {
+          getUserDataByToken().then(user => setUser(user));
         }
       } catch (error) {
         console.error('Error loading user data:', error);
@@ -50,38 +51,26 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
     };
 
     loadUser();
-
-    return () => {};
   }, []);
 
-  useEffect(() => {
-    const saveUser = async () => {
-      try {
-        if (user) {
-          await AsyncStorage.setItem('userData', JSON.stringify(user));
-        } else {
-          await AsyncStorage.removeItem('userData');
-        }
-      } catch (error) {
-        console.error('Error saving user data:', error);
-      }
-    };
+  const setData = (user: User) => {
+    setUser(user);
+  };
 
-    saveUser();
+  const login = (args: LoginArgs) => {
+    const {user, token} = args;
 
-    return () => {};
-  }, [user]);
-
-  const login = (userData: User) => {
-    setUser(userData);
+    setUser(user);
+    AsyncStorage.setItem('userToken', token);
   };
 
   const logout = () => {
+    AsyncStorage.removeItem('userToken');
     setUser(null);
   };
 
   return (
-    <UserContext.Provider value={{user, login, logout}}>
+    <UserContext.Provider value={{user, login, logout, setData}}>
       {children}
     </UserContext.Provider>
   );

@@ -7,6 +7,8 @@ import {LoginData, RegisterData} from '../../model/types/auth.ts';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
 import {login, register} from '../../model/services/auth.ts';
 import styles from './styles.ts';
+import {useToast} from 'react-native-toast-notifications';
+import {Colors} from '@shared/const/colors.ts';
 
 // TODO:
 //  remake login
@@ -19,6 +21,7 @@ export const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const userContext = useUser();
+  const toast = useToast();
 
   const setLoginScreen = () => {
     setIsLogin(true);
@@ -31,14 +34,30 @@ export const Auth = () => {
   const onRegister = async (data: RegisterData) => {
     setLoading(true);
     register(data)
-      .then(() => setIsLogin(true))
+      .then(user => {
+        if (user) {
+          toast.show('Congratulations. Account created successfully!', {
+            placement: 'top',
+            type: 'success',
+            successColor: Colors.ACCENT,
+          });
+          setIsLogin(true);
+        }
+      })
       .finally(() => setLoading(false));
   };
 
   const onLogin = async (data: LoginData) => {
     setLoading(true);
     login(data)
-      .then(user => userContext.login(user))
+      .then(user => {
+        if (user && user.user && user.token) {
+          userContext.login({
+            user: user.user,
+            token: user.token,
+          });
+        }
+      })
       .finally(() => setLoading(false));
   };
 
