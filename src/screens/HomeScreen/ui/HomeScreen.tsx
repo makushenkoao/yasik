@@ -1,4 +1,3 @@
-import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {Container} from '@shared/ui/Container';
 import {Button} from '@shared/ui/Button';
@@ -6,6 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '@shared/types/router.ts';
 import {Emoji} from '@shared/ui/Emoji';
 import {Header} from '@widgets/Header';
+import {HOME_SCREEN_BUTTONS} from '../model/const/home';
 import styles from './styles.ts';
 
 interface HomeScreenProps {
@@ -26,22 +26,13 @@ export const HomeScreen = (props: HomeScreenProps) => {
         <Emoji text="Let's choose what to watch already 🔮" />
       </View>
       <Container style={styles.container}>
-        <Button
-          content="Create session 🎥"
-          onPress={() => onNavigate('CreateSession')}
-        />
-        <Button
-          content="Connect to Session 🤝"
-          onPress={() => onNavigate('ConnectToSession')}
-        />
-        <Button
-          content="Random Movie 🎲"
-          onPress={() => onNavigate('RandomMovie')}
-        />
-        <Button
-          content="Boredom Buster ⚡"
-          onPress={() => onNavigate('EventDay')}
-        />
+        {HOME_SCREEN_BUTTONS.map(item => (
+          <Button
+            key={item.id}
+            content={item.content}
+            onPress={() => onNavigate(item.link)}
+          />
+        ))}
       </Container>
     </ScrollView>
   );

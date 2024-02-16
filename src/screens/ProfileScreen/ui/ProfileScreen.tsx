@@ -13,7 +13,15 @@ export const ProfileScreen = () => {
     deleteUserAccount(user?._id).then(logout);
   };
 
-  if (!user) return;
+  if (!user) {
+    return (
+      <Screen headerVariant="profile">
+        <Container style={styles.container}>
+          <Text style={styles.name}>Data Not Found</Text>
+        </Container>
+      </Screen>
+    );
+  }
 
   return (
     <Screen headerVariant="profile">

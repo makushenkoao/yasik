@@ -15,6 +15,8 @@ import {MovieScreen} from '@screens/MovieScreen';
 import {MatchesScreen} from '@screens/MatchesScreen';
 import {MatchesDetailsScreen} from '@screens/MatchesDetailsScreen';
 import {EndSessionScreen} from '@screens/EndSessionScreen';
+import {SearchScreen} from '@screens/SearchScreen/ui/SearchScreen.tsx';
+import {FilterMoviesScreen} from '@screens/FilterMoviesScreen';
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -84,6 +86,16 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="EndSession"
       component={EndSessionScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="Search"
+      component={SearchScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="FilterMovies"
+      component={FilterMoviesScreen}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>

@@ -20,6 +20,9 @@ import {
   orderItems,
   orderPlaceholder,
 } from '../model/const/createMovieSession.ts';
+import {createSession} from '@entities/Session';
+import {useUser} from '@app/providers/user/UserProvider.tsx';
+import {updateSessionGenres} from '@entities/Session/model/services/session.ts';
 
 interface CreateSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
@@ -27,21 +30,35 @@ interface CreateSessionScreenProps {
 
 export const CreateMovieSession = (props: CreateSessionScreenProps) => {
   const {navigation} = props;
+  const {user} = useUser();
 
   const [genres, setGenres] = useState<Genre[]>([]);
   const [selectedGenres, setSelectedGenres] = useState<number[]>([]);
   const [order, setOrder] = useState<Order>('default');
   const [isError, setIsError] = useState(false);
+  const [sessionId, setSessionId] = useState('');
 
-  const handleCreateToSession = () => {
+  useEffect(() => {
+    createSession(user?._id).then(session => setSessionId(session._id));
+    // eslint-disable-next-line
+  }, []);
+
+  const handleCreateToSession = async () => {
     if (selectedGenres.length === 0) {
       setIsError(true);
       return;
     }
 
+    await updateSessionGenres({
+      id: sessionId,
+      genres: selectedGenres,
+    });
+
     setIsError(false);
 
-    navigation.navigate('StartSession');
+    // TODO: fix ts error
+    // @ts-ignore
+    navigation.navigate('StartSession', {sessionId});
   };
 
   const handleChangeOrder = (value: Order) => {

@@ -100,4 +100,9 @@ export default StyleSheet.create({
     width: 20,
     height: 20,
   },
+  loadingWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '100%',
+  },
 });

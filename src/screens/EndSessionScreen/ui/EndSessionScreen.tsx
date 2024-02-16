@@ -18,7 +18,7 @@ export const EndSessionScreen = (props: EndSessionProps) => {
   };
 
   return (
-    <Screen>
+    <Screen headerVariant="close">
       <View style={styles.container}>
         <Text style={styles.title}>
           We've run out of genres and selections you've chosen 🤯

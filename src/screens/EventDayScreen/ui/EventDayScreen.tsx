@@ -1,25 +1,21 @@
 import React, {useMemo, useState} from 'react';
 import {
   ActivityIndicator,
+  Image,
   Linking,
+  ScrollView,
+  Share,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-import {Screen} from '@widgets/Screen';
 import {Emoji} from '@shared/ui/Emoji';
-import {Container} from '@shared/ui/Container';
 import {Button} from '@shared/ui/Button';
 import {getFilteredActivity, getRandomActivity} from '../model/services/events';
 import {Activity, ActivityType} from '../model/types/event';
-import styles from './styles';
 import {SetUpActivity} from '@screens/EventDayScreen/ui/SetUpActivity/SetUpActivity.tsx';
-
-// TODO:
-//  swipe modal
-//  animation swipe
-//  loading
-//  error
+import {Header} from '@widgets/Header';
+import styles from './styles';
 
 export const EventDayScreen = () => {
   const [activity, setActivity] = useState<Activity | undefined>(undefined);
@@ -109,41 +105,77 @@ export const EventDayScreen = () => {
     ],
   );
 
+  const handleShare = () => {
+    console.log('PRESS');
+    if (!activity) {
+      return;
+    }
+
+    const message = `I found a activity!\n\nActivity: ${activity.activity}\nType: ${activity.type}\nPrice: ${activity.price}\nParticipants: ${activity.participants}\nAccessibility: ${activity.accessibility}`;
+
+    Share.share({
+      message: message,
+    })
+      .then(result => {
+        if (result.action === Share.sharedAction) {
+          if (result.activityType) {
+            console.log('Shared via ', result.activityType);
+          } else {
+            console.log('Shared');
+          }
+        } else if (result.action === Share.dismissedAction) {
+          console.log('Dismissed');
+        }
+      })
+      .catch(err => console.error('Failed to share:', err));
+  };
+
   return (
-    <Screen>
+    <>
+      <Header />
       <Emoji text="Let's find something for you to do today 🎯" />
-      <Container>
-        <Button
-          loading={loading}
-          content="Get Random Activity"
-          onPress={onGetRandomActivityType}
-        />
-        {activity &&
-          (loading ? (
-            <View style={styles.activityWrapper}>
-              <ActivityIndicator size="large" color="#fff" />
-            </View>
-          ) : (
-            <View style={styles.activityWrapper}>
-              <Text style={styles.activityTitle}>
-                We have found an activity 😎
-              </Text>
-              {activitiesBlocks.map(item => (
-                <Text key={item.id} style={styles.activityText}>
-                  <Text style={styles.activityTextBold}>{item.label}</Text>
-                  {item.text}
-                </Text>
-              ))}
-              {activity.link && (
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.container}>
+          <Button
+            loading={loading}
+            content="Get Random Activity"
+            onPress={onGetRandomActivityType}
+          />
+          {activity &&
+            (loading ? (
+              <View style={styles.activityWrapper}>
+                <ActivityIndicator size="large" color="#fff" />
+              </View>
+            ) : (
+              <View style={styles.activityWrapper}>
                 <TouchableOpacity
-                  onPress={() => Linking.openURL(activity.link)}
-                  activeOpacity={0.7}>
-                  <Text style={styles.link}>Open Link</Text>
+                  onPress={handleShare}
+                  style={styles.shareButton}>
+                  <Image
+                    source={require('@shared/assets/images/share.png')}
+                    style={styles.shareImage}
+                  />
                 </TouchableOpacity>
-              )}
-            </View>
-          ))}
-      </Container>
+                <Text style={styles.activityTitle}>
+                  We have found an activity 😎
+                </Text>
+                {activitiesBlocks.map(item => (
+                  <Text key={item.id} style={styles.activityText}>
+                    <Text style={styles.activityTextBold}>{item.label}</Text>
+                    {item.text}
+                  </Text>
+                ))}
+                {activity.link && (
+                  <TouchableOpacity
+                    onPress={() => Linking.openURL(activity.link)}
+                    activeOpacity={0.7}>
+                    <Text style={styles.link}>Open Link</Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            ))}
+        </View>
+      </ScrollView>
       <SetUpActivity
         step={step}
         selectedType={selectedType}
@@ -158,6 +190,6 @@ export const EventDayScreen = () => {
         participants={participants}
         onChangeParticipants={onChangeParticipants}
       />
-    </Screen>
+    </>
   );
 };

@@ -1,6 +1,6 @@
 export interface Session {
-  _id: string
-  __v: number
+  _id: string;
+  __v: number;
   creator: string;
   genres: string[];
   code: string;

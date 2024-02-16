@@ -10,13 +10,6 @@ import styles from './styles.ts';
 import {useToast} from 'react-native-toast-notifications';
 import {Colors} from '@shared/const/colors.ts';
 
-// TODO:
-//  remake login
-//  handle error
-//  handle loading
-//  forgot password
-//  TODO: fix login in iPhone
-
 export const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);

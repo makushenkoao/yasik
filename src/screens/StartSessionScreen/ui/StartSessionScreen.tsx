@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Button as RNButton,
   Image,
@@ -18,6 +18,8 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useToast} from 'react-native-toast-notifications';
 import styles from './styles.ts';
+import {useRoute} from '@react-navigation/native';
+import {getSessionById, Session} from '@entities/Session';
 
 interface StartSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
@@ -26,13 +28,28 @@ interface StartSessionScreenProps {
 export const StartSessionScreen = (props: StartSessionScreenProps) => {
   const {navigation} = props;
   const [isOpenModal, setIsOpenModal] = useState(false);
+  const [session, setSession] = useState<Session | null>(null);
   const toast = useToast();
+  const {params} = useRoute();
+
+  useEffect(() => {
+    // TODO: fix ts error
+    // @ts-ignore
+    getSessionById(params?.sessionId).then(setSession);
+    // @ts-ignore
+  }, [params?.sessionId]);
 
   const handleStartSession = () => {
-    navigation.navigate('Movie');
+    // TODO: fix ts error
+    // @ts-ignore
+    navigation.navigate('Movie', {genres: session?.genres});
   };
   const handleInvite = () => {
-    const message = 'Join my session with code "MOCK_CODE".';
+    if (!session) {
+      return;
+    }
+
+    const message = session.code;
 
     Share.share({
       message: message,
@@ -52,7 +69,11 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
   };
 
   const handleCopyCode = () => {
-    const sessionCode = 'MOCK_CODE';
+    if (!session) {
+      return;
+    }
+
+    const sessionCode = session.code;
     Clipboard.setString(sessionCode);
     toast.show('Code copied successfully', {
       placement: 'top',
@@ -68,6 +89,10 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
 
   const handleOpenModal = () => setIsOpenModal(true);
   const handleCloseModal = () => setIsOpenModal(false);
+
+  if (!session) {
+    return null;
+  }
 
   return (
     <View style={styles.wrapper}>
@@ -92,7 +117,7 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
             onPress={handleCopyCode}
             activeOpacity={0.7}
             style={styles.codeButton}>
-            <Text style={styles.codeText}>MOCK_CODE</Text>
+            <Text style={styles.codeText}>{session.code}</Text>
             <Image
               source={require('@shared/assets/images/copy.png')}
               style={styles.codeImage}

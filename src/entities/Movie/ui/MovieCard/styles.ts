@@ -15,4 +15,12 @@ export default StyleSheet.create({
     padding: 5,
     textAlign: 'center',
   },
+  loadingWrapper: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 150,
+    height: 243.75,
+    borderRadius: 12,
+    backgroundColor: '#333',
+  },
 });

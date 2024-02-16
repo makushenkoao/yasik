@@ -13,6 +13,9 @@ export {
   getMovieImages,
   getMovieTrailer,
   getMovieGenres,
+  searchMovies,
+  getMovieByGenres,
+  getMovieDetailsByGenres,
 } from './model/services/movie';
 export {MovieCard} from './ui/MovieCard/MovieCard';
 export {MoviePoster} from './ui/MoviePoster/MoviePoster';

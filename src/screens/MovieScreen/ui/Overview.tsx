@@ -3,7 +3,13 @@ import {Text, View} from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
 import styles from './styles.ts';
 
-export const Overview = () => {
+interface OverviewProps {
+  overview: string;
+}
+
+export const Overview = (props: OverviewProps) => {
+  const {overview} = props;
+
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   const snapPoints = useMemo(() => ['10%', '50%'], []);
@@ -18,12 +24,7 @@ export const Overview = () => {
       <View style={styles.bottomSheetWrapper}>
         <Text style={styles.bottomSheetTitle}>Overview</Text>
         <View style={styles.bottomSheetContainer}>
-          <Text style={styles.bottomDescription}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
-            ad, alias cum deserunt doloremque ea eius enim eos fugiat id minima
-            necessitatibus non odit qui reiciendis, saepe suscipit tempore
-            voluptates?
-          </Text>
+          <Text style={styles.bottomDescription}>{overview}</Text>
         </View>
       </View>
     </BottomSheet>

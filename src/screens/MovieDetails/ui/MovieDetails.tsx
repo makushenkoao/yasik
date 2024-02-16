@@ -17,7 +17,7 @@ import {VideoTrailer} from '@features/trailer';
 export const MovieDetails = () => {
   const route = useRoute();
 
-  // TODO: fix ts errpr
+  // TODO: fix ts error
   // @ts-ignore
   const {id} = route.params;
 

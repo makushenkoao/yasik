@@ -20,9 +20,9 @@ export const getSessionById = async (id: string) => {
   }
 };
 
-export const createSession = async (sessionData: any) => {
+export const createSession = async (creator?: string) => {
   try {
-    const response = await $api.post('/sessions', sessionData);
+    const response = await $api.post('/sessions', {creator});
     return response.data;
   } catch (error) {
     console.log('Error creating session:', error);
@@ -52,6 +52,23 @@ export const addMatchesToSession = async (
     return response.data;
   } catch (error) {
     console.log('Error adding matches to session:', error);
+    throw error;
+  }
+};
+
+interface CreateSessionArgs {
+  genres: number[];
+  id: string;
+}
+
+export const updateSessionGenres = async (args: CreateSessionArgs) => {
+  const {genres, id} = args;
+
+  try {
+    const response = await $api.post(`/sessions/${id}/genres`, {genres});
+    return response.data;
+  } catch (error) {
+    console.log('Error creating session:', error);
     throw error;
   }
 };
