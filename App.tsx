@@ -13,6 +13,8 @@ import {UserProvider} from '@app/providers/user/UserProvider';
 //  forgot password login
 //  eslint set up, eslint imports order
 //  API
+//  readme
+//  validation
 
 function App(): React.JSX.Element {
   const theme = {

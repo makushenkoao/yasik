@@ -5,12 +5,17 @@ import {Button} from '@shared/ui/Button';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
 import {deleteUserAccount} from '@entities/User';
 import styles from './styles.ts';
+import {useState} from 'react';
 
 export const ProfileScreen = () => {
   const {logout, user} = useUser();
+  const [loading, setLoading] = useState(false);
 
   const onDeleteAccount = () => {
-    deleteUserAccount(user?._id).then(logout);
+    setLoading(true);
+    deleteUserAccount(user?._id)
+      .then(logout)
+      .finally(() => setLoading(false));
   };
 
   if (!user) {
@@ -34,6 +39,7 @@ export const ProfileScreen = () => {
               onPress={onDeleteAccount}
               content="Delete Account"
               variant="error"
+              loading={loading}
             />
           </View>
         </View>

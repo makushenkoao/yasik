@@ -37,7 +37,7 @@ export const Button = memo((props: ButtonProps) => {
         styles.container,
         styles[variant],
         disabled && variant === 'primary' && styles.disabled,
-        loading && styles.disabled,
+        loading && variant === 'primary' && styles.disabled,
         style,
       ]}
       activeOpacity={0.7}
