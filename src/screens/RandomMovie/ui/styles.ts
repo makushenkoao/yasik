@@ -9,7 +9,7 @@ export default StyleSheet.create({
   },
   content: {
     height: '100%',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
   },
   error: {
     color: Colors.ERROR,

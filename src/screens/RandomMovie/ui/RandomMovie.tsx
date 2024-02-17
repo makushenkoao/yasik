@@ -35,32 +35,6 @@ export const RandomMovie = () => {
       });
   };
 
-  const handleShare = () => {
-    if (!movie) {
-      return null;
-    }
-
-    const message = `I found a movie to watch!\n\n"${movie.title}" | ${new Date(
-      movie.release_date,
-    ).getFullYear()} | ${movie.vote_average}\n\n${movie.overview}`;
-
-    Share.share({
-      message: message,
-    })
-      .then(result => {
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            console.log('Shared via ', result.activityType);
-          } else {
-            console.log('Shared');
-          }
-        } else if (result.action === Share.dismissedAction) {
-          console.log('Dismissed');
-        }
-      })
-      .catch(err => console.error('Failed to share:', err));
-  };
-
   return (
     <Screen>
       {!movie && (
@@ -78,23 +52,12 @@ export const RandomMovie = () => {
       )}
       <Container>
         <View style={styles.content}>
-          <View>
-            {movie && (
-              <RNButton
-                onPress={handleShare}
-                title="Share"
-                color={Colors.HIGHLIGHT}
-              />
-            )}
-          </View>
-          <View>
-            {error && <Text style={styles.error}>{error}</Text>}
-            <Button
-              loading={loading}
-              content="Get Random Movie"
-              onPress={handleGetRandomMovie}
-            />
-          </View>
+          {error && <Text style={styles.error}>{error}</Text>}
+          <Button
+            loading={loading}
+            content="Get Random Movie"
+            onPress={handleGetRandomMovie}
+          />
         </View>
       </Container>
     </Screen>

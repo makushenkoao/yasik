@@ -7,10 +7,12 @@ import {
   View,
 } from 'react-native';
 import styles from '../ui/styles.ts';
+import {Colors} from '@shared/const/colors.ts';
 
 interface MovieDetailsPosterProps {
   releaseDate: string;
   voteAverage: number;
+  handleShare: () => void;
   title: string;
   img: string | null;
   handleOpenVideo: () => void;
@@ -21,8 +23,15 @@ interface MovieDetailsPosterProps {
 }
 
 export const MovieDetailsPoster = (props: MovieDetailsPosterProps) => {
-  const {releaseDate, img, voteAverage, handleOpenVideo, title, countries} =
-    props;
+  const {
+    releaseDate,
+    img,
+    handleShare,
+    voteAverage,
+    handleOpenVideo,
+    title,
+    countries,
+  } = props;
 
   return (
     <ImageBackground
@@ -31,6 +40,15 @@ export const MovieDetailsPoster = (props: MovieDetailsPosterProps) => {
       }}
       style={styles.imageBackground}>
       <View style={styles.overlay}>
+        <TouchableOpacity
+          onPress={handleShare}
+          activeOpacity={0.7}
+          style={styles.shareButton}>
+          <Image
+            source={require('@shared/assets/images/share.png')}
+            style={styles.shareIcon}
+          />
+        </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
         <View style={styles.details}>
           <Text style={styles.detailText}>

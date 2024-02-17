@@ -15,6 +15,7 @@ export default StyleSheet.create({
     paddingVertical: 20,
   },
   overlay: {
+    position: 'relative',
     backgroundColor: 'rgba(0, 0, 0, 0.7)',
     padding: 10,
   },
@@ -101,4 +102,15 @@ export default StyleSheet.create({
     height: 20,
   },
   trailer: {zIndex: 1000},
+  shareButton: {
+    position: 'absolute',
+    top: 15,
+    right: 10,
+    zIndex: 1000,
+  },
+  shareIcon: {
+    width: 20,
+    height: 20,
+    tintColor: Colors.HIGHLIGHT,
+  },
 });
