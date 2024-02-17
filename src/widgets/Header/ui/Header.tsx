@@ -1,9 +1,21 @@
-import {Image, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  ImageSourcePropType,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import styles from './index.ts';
+import styles from './styles.ts';
 import {RootParamList} from '@shared/types/router.ts';
 
-export type HeaderVariant = 'default' | 'home' | 'profile' | 'close' | 'search';
+export type HeaderVariant =
+  | 'default'
+  | 'home'
+  | 'profile'
+  | 'close'
+  | 'search'
+  | 'matches';
 
 interface HeaderProps {
   variant?: HeaderVariant;
@@ -23,113 +35,88 @@ export const Header = (props: HeaderProps) => {
     navigation.goBack();
   };
 
+  const renderIcon = (
+    position: 'right' | 'left',
+    iconPath: ImageSourcePropType,
+    onPress: () => void,
+  ) => (
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={
+        styles[position === 'left' ? 'leftIconWrapper' : 'rightIconWrapper']
+      }
+      onPress={onPress}>
+      <Image source={iconPath} style={styles.icon} />
+    </TouchableOpacity>
+  );
+
+  const backIcon = renderIcon(
+    'left',
+    require('@shared/assets/images/back.png'),
+    onBackNavigate,
+  );
+
   const renderContent = () => {
     switch (variant) {
       case 'home':
         return (
           <>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.leftIconWrapper}
-              onPress={() => onNavigate('Profile')}>
-              <Image
-                source={require('@shared/assets/images/profile.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => onNavigate('Matches')}
-              style={styles.rightIconWrapper}>
-              <Image
-                source={require('@shared/assets/images/heart.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+            {renderIcon(
+              'left',
+              require('@shared/assets/images/profile.png'),
+              () => onNavigate('Profile'),
+            )}
+            {renderIcon(
+              'right',
+              require('@shared/assets/images/handshake-heart.png'),
+              () => onNavigate('Matches'),
+            )}
           </>
         );
       case 'profile':
         return (
           <>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.leftIconWrapper}
-              onPress={onBackNavigate}>
-              <Image
-                source={require('@shared/assets/images/back.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => onNavigate('ProfileEdit')}
-              style={styles.rightIconWrapper}>
-              <Image
-                source={require('@shared/assets/images/settings.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+            {backIcon}
+            {renderIcon(
+              'right',
+              require('@shared/assets/images/settings.png'),
+              () => onNavigate('ProfileEdit'),
+            )}
           </>
         );
       case 'search':
         return (
           <>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              style={styles.leftIconWrapper}
-              onPress={onBackNavigate}>
-              <Image
-                source={require('@shared/assets/images/back.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => onNavigate('FilterMovies')}
-              style={styles.rightIconWrapper}>
-              <Image
-                source={require('@shared/assets/images/filter.png')}
-                style={styles.icon}
-              />
-            </TouchableOpacity>
+            {backIcon}
+            {renderIcon(
+              'right',
+              require('@shared/assets/images/filter.png'),
+              () => onNavigate('FilterMovies'),
+            )}
+          </>
+        );
+      case 'matches':
+        return (
+          <>
+            {backIcon}
+
+            {renderIcon(
+              'right',
+              require('@shared/assets/images/heart.png'),
+              () => onNavigate('FavoriteMovies'),
+            )}
           </>
         );
       case 'close':
-        return (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.leftIconWrapper}
-            onPress={() => onNavigate(closeUrl)}>
-            <Image
-              source={require('@shared/assets/images/cross.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
+        return renderIcon(
+          'left',
+          require('@shared/assets/images/cross.png'),
+          () => onNavigate(closeUrl),
         );
       case 'default':
-        return (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.leftIconWrapper}
-            onPress={onBackNavigate}>
-            <Image
-              source={require('@shared/assets/images/back.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        );
+        return backIcon;
       default:
-        return (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.leftIconWrapper}
-            onPress={onBackNavigate}>
-            <Image
-              source={require('@shared/assets/images/back.png')}
-              style={styles.icon}
-            />
-          </TouchableOpacity>
-        );
+        return backIcon;
     }
   };
 

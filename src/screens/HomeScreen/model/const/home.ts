@@ -20,11 +20,6 @@ export const HOME_SCREEN_BUTTONS = [
     link: 'Search',
   },
   {
-    id: 5,
-    content: 'Fav Movies ❤️',
-    link: 'FavoriteMovies',
-  },
-  {
     id: 6,
     content: 'Boredom Buster ⚡',
     link: 'EventDay',

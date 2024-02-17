@@ -1,5 +1,4 @@
 import {ScrollView, View} from 'react-native';
-import {Container} from '@shared/ui/Container';
 import {Button} from '@shared/ui/Button';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RootParamList} from '@shared/types/router.ts';

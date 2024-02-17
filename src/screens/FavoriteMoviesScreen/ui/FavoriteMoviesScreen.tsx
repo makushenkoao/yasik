@@ -44,7 +44,7 @@ export const FavoriteMoviesScreen = () => {
 
   return (
     <>
-      <Header variant="close" />
+      <Header variant="close" closeUrl="Matches" />
       <Emoji text="Add your favorite movies so you don’t forget to watch them 🤪" />
       <ScrollView contentContainerStyle={styles.scroll}>
         <View style={styles.container}>

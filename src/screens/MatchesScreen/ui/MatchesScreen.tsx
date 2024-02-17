@@ -24,7 +24,7 @@ export const MatchesScreen = (props: MatchesScreenProps) => {
 
   return (
     <View style={styles.wrapper}>
-      <Header />
+      <Header variant="matches" />
       <ImageBackground
         style={styles.imageBackground}
         source={{
