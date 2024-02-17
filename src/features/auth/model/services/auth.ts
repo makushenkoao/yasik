@@ -31,3 +31,13 @@ export const register = async (props: RegisterData) => {
     console.error('Register Error:', error);
   }
 };
+
+export const updatePassword = async (email: string) => {
+  try {
+    const response = await $api.post('auth/update-password', {email});
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+  }
+};

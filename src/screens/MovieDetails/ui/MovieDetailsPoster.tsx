@@ -7,7 +7,6 @@ import {
   View,
 } from 'react-native';
 import styles from '../ui/styles.ts';
-import {Colors} from '@shared/const/colors.ts';
 
 interface MovieDetailsPosterProps {
   releaseDate: string;

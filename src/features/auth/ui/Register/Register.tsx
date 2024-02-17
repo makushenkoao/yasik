@@ -93,7 +93,7 @@ export const Register = (props: RegisterProps) => {
       <View>
         <Button content="Sign Up" onPress={onRegister} loading={loading} />
         <RNButton
-          title="Login to existing account"
+          title="Login to Existing Account"
           onPress={setLoginScreen}
           disabled={loading}
         />

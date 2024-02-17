@@ -9,6 +9,7 @@ import styles from './styles.ts';
 interface LoginProps {
   onSubmit: (data: LoginData) => void;
   setRegisterScreen: () => void;
+  setForgotPasswordScreen: () => void;
   loading?: boolean;
 }
 
@@ -18,7 +19,7 @@ const initialState = {
 };
 
 export const Login = (props: LoginProps) => {
-  const {onSubmit, setRegisterScreen, loading} = props;
+  const {onSubmit, setRegisterScreen, loading, setForgotPasswordScreen} = props;
   const [inputs, setInputs] = useState<LoginData>({...initialState});
 
   const handleChange = (name: LoginField, value: string) => {
@@ -53,9 +54,15 @@ export const Login = (props: LoginProps) => {
       <View>
         <Button content="Sign In" onPress={onLogin} loading={loading} />
         <RNButton
-          title="Register a new account"
+          title="Register a New Account"
           onPress={setRegisterScreen}
           disabled={loading}
+        />
+        <RNButton
+          title="Forgot Password"
+          onPress={setForgotPasswordScreen}
+          disabled={loading}
+          color="#777"
         />
       </View>
     </View>

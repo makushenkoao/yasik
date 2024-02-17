@@ -2,9 +2,8 @@ import {useState} from 'react';
 import {Container} from '@shared/ui/Container';
 import {Button} from '@shared/ui/Button';
 import {Screen} from '@widgets/Screen';
-import {Text, View, Button as RNButton, Share} from 'react-native';
+import {Text, View} from 'react-native';
 import {Emoji} from '@shared/ui/Emoji';
-import {Colors} from '@shared/const/colors.ts';
 import {
   getMovieImages,
   getRandomMovie,

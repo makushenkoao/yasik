@@ -58,7 +58,6 @@ export const SearchScreen = () => {
           <Input
             placeholder="Search"
             keyboardType="web-search"
-            keyboardAppearance="dark"
             variant="outlined"
             value={query}
             onChangeText={text => setQuery(text)}
