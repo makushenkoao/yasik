@@ -5,6 +5,7 @@ export default StyleSheet.create({
     flexGrow: 1,
   },
   container: {
-    marginVertical: 50,
+    paddingVertical: 20,
+    paddingHorizontal: 24,
   },
 });

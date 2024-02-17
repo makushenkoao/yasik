@@ -5,17 +5,6 @@ import {ToastProvider} from 'react-native-toast-notifications';
 import {Colors} from '@shared/const/colors';
 import {UserProvider} from '@app/providers/user/UserProvider';
 
-// TODO:
-//  handle errors
-//  handle loading
-//  decomposition
-//  focus input keyboard
-//  forgot password login
-//  eslint set up, eslint imports order
-//  API
-//  readme
-//  validation
-
 function App(): React.JSX.Element {
   const theme = {
     ...DefaultTheme,

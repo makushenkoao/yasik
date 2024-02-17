@@ -13,9 +13,9 @@ import {RootParamList} from '@shared/types/router.ts';
 import styles from './styles.ts';
 
 interface MovieCardProps {
-  id: number;
-  title: string;
-  img: string;
+  id?: number;
+  title?: string;
+  img?: string;
   style?: StyleProp<ViewStyle>;
   loading?: boolean;
 }

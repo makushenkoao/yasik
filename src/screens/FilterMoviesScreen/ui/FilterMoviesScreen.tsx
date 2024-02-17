@@ -99,7 +99,7 @@ export const FilterMoviesScreen = () => {
             </View>
           </ScrollView>
           <View style={styles.filterContent}>
-            <Text style={styles.sortByTitle}>Movie Order in Session</Text>
+            <Text style={styles.sortByTitle}>Sort by</Text>
             <RNPickerSelect
               onValueChange={handleChangeSortBy}
               items={sortByItems}

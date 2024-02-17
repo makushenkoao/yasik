@@ -17,6 +17,7 @@ import {MatchesDetailsScreen} from '@screens/MatchesDetailsScreen';
 import {EndSessionScreen} from '@screens/EndSessionScreen';
 import {SearchScreen} from '@screens/SearchScreen/ui/SearchScreen.tsx';
 import {FilterMoviesScreen} from '@screens/FilterMoviesScreen';
+import {FavoriteMoviesScreen} from '@screens/FavoriteMoviesScreen';
 
 const Stack = createStackNavigator();
 const HomeStack = createStackNavigator();
@@ -96,6 +97,11 @@ const HomeStackNavigator = () => (
     <HomeStack.Screen
       name="FilterMovies"
       component={FilterMoviesScreen}
+      options={{headerShown: false}}
+    />
+    <HomeStack.Screen
+      name="FavoriteMovies"
+      component={FavoriteMoviesScreen}
       options={{headerShown: false}}
     />
   </HomeStack.Navigator>

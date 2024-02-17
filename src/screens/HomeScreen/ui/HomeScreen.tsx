@@ -20,20 +20,22 @@ export const HomeScreen = (props: HomeScreenProps) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.scroll}>
+    <>
       <Header variant="home" />
       <View>
         <Emoji text="Let's choose what to watch already 🔮" />
       </View>
-      <Container style={styles.container}>
-        {HOME_SCREEN_BUTTONS.map(item => (
-          <Button
-            key={item.id}
-            content={item.content}
-            onPress={() => onNavigate(item.link)}
-          />
-        ))}
-      </Container>
-    </ScrollView>
+      <ScrollView contentContainerStyle={styles.scroll}>
+        <View style={styles.container}>
+          {HOME_SCREEN_BUTTONS.map(item => (
+            <Button
+              key={item.id}
+              content={item.content}
+              onPress={() => onNavigate(item.link)}
+            />
+          ))}
+        </View>
+      </ScrollView>
+    </>
   );
 };

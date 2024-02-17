@@ -4,7 +4,6 @@ import {useRoute} from '@react-navigation/native';
 import {Header} from '@widgets/Header';
 import {
   getMovieDetails,
-  getMovieImages,
   getMovieTrailer,
   MovieDetails as IMovieDetails,
   MovieVideo,
@@ -13,8 +12,16 @@ import styles from './styles.ts';
 import {MovieDetailsPoster} from '@screens/MovieDetails/ui/MovieDetailsPoster.tsx';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {VideoTrailer} from '@features/trailer';
+import {Button} from '@shared/ui/Button';
+import {
+  addToFavorites,
+  getFavoritesByUserId,
+  removeFromFavorites,
+} from '@entities/Favorite';
+import {useUser} from '@app/providers/user/UserProvider.tsx';
 
 export const MovieDetails = () => {
+  const {user} = useUser();
   const route = useRoute();
 
   // TODO: fix ts error
@@ -23,7 +30,8 @@ export const MovieDetails = () => {
 
   const [movie, setMovie] = useState<IMovieDetails | null>(null);
   const [video, setVideo] = useState<MovieVideo | null>(null);
-  const [image, setImage] = useState('');
+  const [isFavorites, setIsFavorites] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const bottomSheetRef = useRef<BottomSheet>(null);
 
@@ -36,8 +44,57 @@ export const MovieDetails = () => {
   useEffect(() => {
     getMovieDetails(id).then(setMovie);
     getMovieTrailer(id).then(setVideo);
-    getMovieImages(id).then(data => setImage(data.backdrops[0]?.file_path));
   }, [id]);
+
+  const isFavoriteMovie = async () => {
+    if (!user || !movie) {
+      return;
+    }
+
+    const favs = await getFavoritesByUserId({userId: user._id});
+
+    // TODO: fav.movieId
+    const isFavorite = favs.some(fav => Number(fav.movieId) === movie.id);
+
+    setIsFavorites(isFavorite);
+  };
+
+  useEffect(() => {
+    setLoading(true);
+    isFavoriteMovie().finally(() => setLoading(false));
+    // eslint-disable-next-line
+  }, []);
+
+  const handleAddToFavorites = () => {
+    if (!movie || !user) {
+      return;
+    }
+
+    setLoading(true);
+
+    addToFavorites({
+      movieId: movie.id,
+      title: movie.title,
+      userId: user._id,
+      backdrop_path: movie.backdrop_path || movie.poster_path || '',
+    })
+      .then(() => setIsFavorites(true))
+      .finally(() => setLoading(false));
+  };
+
+  const handleRemoveFromFavorites = () => {
+    if (!movie || !user) {
+      return;
+    }
+
+    setLoading(true);
+    removeFromFavorites({
+      movieId: movie.id,
+      userId: user._id,
+    })
+      .then(() => setIsFavorites(false))
+      .finally(() => setLoading(false));
+  };
 
   if (!movie || !video) {
     return null;
@@ -49,7 +106,7 @@ export const MovieDetails = () => {
       {movie && (
         <MovieDetailsPoster
           title={movie.title}
-          img={image || movie.poster_path}
+          img={movie.backdrop_path || movie.poster_path}
           handleOpenVideo={handleOpenVideo}
           releaseDate={movie.release_date}
           voteAverage={movie.vote_average}
@@ -72,7 +129,23 @@ export const MovieDetails = () => {
         snapPoints={snapPoints}
         bottomSheetRef={bottomSheetRef}
         uri={video?.results[0]?.key}
+        containerStyle={styles.trailer}
       />
+      <View style={styles.container}>
+        {isFavorites ? (
+          <Button
+            content="Remove from Favorites"
+            onPress={handleRemoveFromFavorites}
+            loading={loading}
+          />
+        ) : (
+          <Button
+            content="Add to Favorites"
+            onPress={handleAddToFavorites}
+            loading={loading}
+          />
+        )}
+      </View>
     </View>
   );
 };

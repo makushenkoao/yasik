@@ -100,4 +100,5 @@ export default StyleSheet.create({
     width: 20,
     height: 20,
   },
+  trailer: {zIndex: 1000},
 });
