@@ -26,7 +26,7 @@ export async function getRandomMovie() {
   return randomMovie;
 }
 
-export const getMovieDetails = async (id: number) => {
+export const getMovieDetails = async (id: number | string) => {
   try {
     const response = await axios.get(
       `${config.THEMOVIEDB_URL}/movie/${id}?language=en-US`,

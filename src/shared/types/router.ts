@@ -1,14 +1,14 @@
 export interface RootParamList {
   Home: undefined;
   EventDay: undefined;
-  MovieDetails: {id: string};
+  MovieDetails: {id: string | number};
   ProfileEdit: undefined;
   Profile: undefined;
-  Movie: undefined;
+  Movie: {genres: (number | string)[]};
   RandomMovie: undefined;
   CreateMovieSession: undefined;
   ConnectMovieSession: undefined;
-  StartSession: undefined;
+  StartSession: {sessionId: string};
   EndSession: undefined;
   SearchScreen: undefined;
   Matches: undefined;

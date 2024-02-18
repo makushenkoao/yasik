@@ -12,7 +12,7 @@ import {
 } from '@entities/Movie';
 import styles from './styles.ts';
 
-export const RandomMovie = () => {
+export const RandomMovieScreen = () => {
   const [movie, setMovie] = useState<Movie | null>(null);
   const [image, setImage] = useState('');
   const [loading, setLoading] = useState(false);

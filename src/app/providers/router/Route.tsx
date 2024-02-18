@@ -6,10 +6,10 @@ import {LoginScreen} from '@screens/LoginScreen';
 import {ProfileScreen} from '@screens/ProfileScreen';
 import {ProfileEditScreen} from '@screens/ProfileEditScreen';
 import {EventDayScreen} from '@screens/EventDayScreen';
-import {RandomMovie} from '@screens/RandomMovie';
-import {MovieDetails} from '@screens/MovieDetails';
+import {RandomMovieScreen} from 'src/screens/RandomMovieScreen';
+import {MovieDetailsScreen} from 'src/screens/MovieDetailsScreen';
 import {ConnectToSessionScreen} from '@screens/ConnectToSessionScreen';
-import {CreateMovieSession} from '@screens/CreateMovieSession';
+import {CreateMovieSessionScreen} from 'src/screens/CreateMovieSessionScreen';
 import {StartSessionScreen} from '@screens/StartSessionScreen';
 import {MovieScreen} from '@screens/MovieScreen';
 import {MatchesScreen} from '@screens/MatchesScreen';
@@ -46,12 +46,12 @@ const HomeStackNavigator = () => (
     />
     <HomeStack.Screen
       name="RandomMovie"
-      component={RandomMovie}
+      component={RandomMovieScreen}
       options={{headerShown: false}}
     />
     <HomeStack.Screen
       name="MovieDetails"
-      component={MovieDetails}
+      component={MovieDetailsScreen}
       options={{headerShown: false}}
     />
     <HomeStack.Screen
@@ -61,7 +61,7 @@ const HomeStackNavigator = () => (
     />
     <HomeStack.Screen
       name="CreateSession"
-      component={CreateMovieSession}
+      component={CreateMovieSessionScreen}
       options={{headerShown: false}}
     />
     <HomeStack.Screen

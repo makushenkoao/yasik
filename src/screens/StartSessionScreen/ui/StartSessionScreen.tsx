@@ -17,7 +17,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {useToast} from 'react-native-toast-notifications';
 import styles from './styles.ts';
-import {useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 import {getSessionById, Session} from '@entities/Session';
 import {Share} from '@features/share';
 
@@ -25,24 +25,24 @@ interface StartSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
 }
 
+type StartSessionRouteProp = RouteProp<RootParamList, 'StartSession'>;
 export const StartSessionScreen = (props: StartSessionScreenProps) => {
   const {navigation} = props;
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [session, setSession] = useState<Session | null>(null);
   const toast = useToast();
-  const {params} = useRoute();
+  const {params} = useRoute<StartSessionRouteProp>();
 
   useEffect(() => {
-    // TODO: fix ts error
-    // @ts-ignore
-    getSessionById(params?.sessionId).then(setSession);
-    // @ts-ignore
+    getSessionById(params.sessionId).then(setSession);
   }, [params?.sessionId]);
 
   const handleStartSession = () => {
-    // TODO: fix ts error
-    // @ts-ignore
-    navigation.navigate('Movie', {genres: session?.genres});
+    if (!session) {
+      return;
+    }
+
+    navigation.navigate('Movie', {genres: session.genres});
   };
 
   const handleCopyCode = () => {

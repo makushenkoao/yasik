@@ -28,7 +28,7 @@ interface CreateSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
 }
 
-export const CreateMovieSession = (props: CreateSessionScreenProps) => {
+export const CreateMovieSessionScreen = (props: CreateSessionScreenProps) => {
   const {navigation} = props;
   const {user} = useUser();
 
@@ -56,8 +56,6 @@ export const CreateMovieSession = (props: CreateSessionScreenProps) => {
 
     setIsError(false);
 
-    // TODO: fix ts error
-    // @ts-ignore
     navigation.navigate('StartSession', {sessionId});
   };
 

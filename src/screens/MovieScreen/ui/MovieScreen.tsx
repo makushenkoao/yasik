@@ -12,7 +12,7 @@ import {VideoTrailer} from '@features/trailer';
 import {Overview} from '@screens/MovieScreen/ui/Overview.tsx';
 import styles from './styles.ts';
 import BottomSheet from '@gorhom/bottom-sheet';
-import {useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 import {getMovieTrailer, MovieDetails, MovieVideo} from '@entities/Movie';
 import {getMovieDetailsByGenres} from '@entities/Movie/model/services/movie.ts';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -22,14 +22,14 @@ interface MovieScreenProps {
   navigation: StackNavigationProp<RootParamList, 'Movie'>;
 }
 
+type MovieRouteProp = RouteProp<RootParamList, 'Movie'>;
+
 export const MovieScreen = (props: MovieScreenProps) => {
   const {navigation} = props;
 
-  const {
-    // TODO: fix ts error
-    // @ts-ignore
-    params: {genres},
-  } = useRoute();
+  const {params} = useRoute<MovieRouteProp>();
+
+  const genres = params.genres;
 
   const [movies, setMovies] = useState<MovieDetails[]>([]);
   const [selectedMovies, setSelectedMovies] = useState<string[]>([]); // сохраняем выбранные фильмы

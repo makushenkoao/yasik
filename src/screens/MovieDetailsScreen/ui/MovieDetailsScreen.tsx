@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {RouteProp, useRoute} from '@react-navigation/native';
 import {Header} from '@widgets/Header';
 import {
   getMovieDetails,
@@ -9,7 +9,7 @@ import {
   MovieVideo,
 } from '@entities/Movie';
 import styles from './styles.ts';
-import {MovieDetailsPoster} from '@screens/MovieDetails/ui/MovieDetailsPoster.tsx';
+import {MovieDetailsPoster} from '@screens/MovieDetailsScreen/ui/MovieDetailsPoster.tsx';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {VideoTrailer} from '@features/trailer';
 import {Button} from '@shared/ui/Button';
@@ -19,13 +19,14 @@ import {
   removeFromFavorites,
 } from '@entities/Favorite';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
+import {RootParamList} from '@shared/types/router.ts';
 
-export const MovieDetails = () => {
+type MovieDetailsRouteProp = RouteProp<RootParamList, 'MovieDetails'>;
+
+export const MovieDetailsScreen = () => {
   const {user} = useUser();
-  const route = useRoute();
+  const route = useRoute<MovieDetailsRouteProp>();
 
-  // TODO: fix ts error
-  // @ts-ignore
   const {id} = route.params;
 
   const [movie, setMovie] = useState<IMovieDetails | null>(null);
