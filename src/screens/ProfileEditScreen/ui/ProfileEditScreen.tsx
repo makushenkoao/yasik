@@ -1,13 +1,13 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {Container} from '@shared/ui/Container';
 import {View} from 'react-native';
 import {Screen} from '@widgets/Screen/ui/Screen.tsx';
 import {Input} from '@shared/ui/Input';
 import {Button} from '@shared/ui/Button';
-import styles from './styles.ts';
 import {useUser} from '@app/providers/user/UserProvider.tsx';
 import {updateUser} from '@entities/User';
 import {useToast} from 'react-native-toast-notifications';
+import styles from './styles.ts';
 
 export const ProfileEditScreen = () => {
   const {user, setData} = useUser();

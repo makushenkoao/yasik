@@ -37,7 +37,7 @@ export const ForgotPassword = (props: ForgotPasswordProps) => {
       />
       <View>
         <Button
-          content="Sign In"
+          content="Submit"
           onPress={handleUpdatePassword}
           loading={loading}
         />
