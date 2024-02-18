@@ -1,10 +1,8 @@
 import React, {useMemo, useState} from 'react';
 import {
   ActivityIndicator,
-  Image,
   Linking,
   ScrollView,
-  Share,
   Text,
   TouchableOpacity,
   View,
@@ -16,6 +14,7 @@ import {Activity, ActivityType} from '../model/types/event';
 import {SetUpActivity} from '@screens/EventDayScreen/ui/SetUpActivity/SetUpActivity.tsx';
 import {Header} from '@widgets/Header';
 import styles from './styles';
+import {Share} from '@features/share';
 
 export const EventDayScreen = () => {
   const [activity, setActivity] = useState<Activity | undefined>(undefined);
@@ -105,30 +104,7 @@ export const EventDayScreen = () => {
     ],
   );
 
-  const handleShare = () => {
-    console.log('PRESS');
-    if (!activity) {
-      return;
-    }
-
-    const message = `I found a activity!\n\nActivity: ${activity.activity}\nType: ${activity.type}\nPrice: ${activity.price}\nParticipants: ${activity.participants}\nAccessibility: ${activity.accessibility}`;
-
-    Share.share({
-      message: message,
-    })
-      .then(result => {
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            console.log('Shared via ', result.activityType);
-          } else {
-            console.log('Shared');
-          }
-        } else if (result.action === Share.dismissedAction) {
-          console.log('Dismissed');
-        }
-      })
-      .catch(err => console.error('Failed to share:', err));
-  };
+  const shareMessage = `I found a activity!\n\nActivity: ${activity?.activity}\nType: ${activity?.type}\nPrice: ${activity?.price}\nParticipants: ${activity?.participants}\nAccessibility: ${activity?.accessibility}`;
 
   return (
     <>
@@ -148,14 +124,7 @@ export const EventDayScreen = () => {
               </View>
             ) : (
               <View style={styles.activityWrapper}>
-                <TouchableOpacity
-                  onPress={handleShare}
-                  style={styles.shareButton}>
-                  <Image
-                    source={require('@shared/assets/images/share.png')}
-                    style={styles.shareImage}
-                  />
-                </TouchableOpacity>
+                <Share shareMessage={shareMessage} />
                 <Text style={styles.activityTitle}>
                   We have found an activity 😎
                 </Text>

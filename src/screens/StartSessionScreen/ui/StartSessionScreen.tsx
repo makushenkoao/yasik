@@ -5,7 +5,6 @@ import {
   ImageBackground,
   Modal,
   ScrollView,
-  Share,
   Text,
   TouchableOpacity,
   View,
@@ -20,6 +19,7 @@ import {useToast} from 'react-native-toast-notifications';
 import styles from './styles.ts';
 import {useRoute} from '@react-navigation/native';
 import {getSessionById, Session} from '@entities/Session';
+import {Share} from '@features/share';
 
 interface StartSessionScreenProps {
   navigation: StackNavigationProp<RootParamList, 'StartSession'>;
@@ -43,29 +43,6 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
     // TODO: fix ts error
     // @ts-ignore
     navigation.navigate('Movie', {genres: session?.genres});
-  };
-  const handleInvite = () => {
-    if (!session) {
-      return;
-    }
-
-    const message = session.code;
-
-    Share.share({
-      message: message,
-    })
-      .then(result => {
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            console.log('Shared via ', result.activityType);
-          } else {
-            console.log('Shared');
-          }
-        } else if (result.action === Share.dismissedAction) {
-          console.log('Dismissed');
-        }
-      })
-      .catch(error => console.error('Failed to share:', error));
   };
 
   const handleCopyCode = () => {
@@ -123,10 +100,11 @@ export const StartSessionScreen = (props: StartSessionScreenProps) => {
               style={styles.codeImage}
             />
           </TouchableOpacity>
-          <Button
+          <Share
+            type="button"
+            buttonTitle="Invite"
+            shareMessage={session.code}
             style={styles.inviteBtn}
-            content="Invite"
-            onPress={handleInvite}
           />
         </View>
       </View>

@@ -42,6 +42,7 @@ export const UserProvider = ({children}: {children: ReactNode}) => {
     const loadUser = async () => {
       try {
         const token = await AsyncStorage.getItem('userToken');
+        console.log(token);
         if (token) {
           getUserDataByToken().then(user => setUser(user));
         }

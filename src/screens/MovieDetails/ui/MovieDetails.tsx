@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {ScrollView, Share, Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {useRoute} from '@react-navigation/native';
 import {Header} from '@widgets/Header';
 import {
@@ -96,42 +96,22 @@ export const MovieDetails = () => {
       .finally(() => setLoading(false));
   };
 
-  const handleShare = () => {
-    if (!movie) {
-      return null;
-    }
-
-    const message = `I found a movie to watch!\n\n"${movie.title}" | ${new Date(
-      movie.release_date,
-    ).getFullYear()} | ${movie.vote_average}\n\n${movie.overview}`;
-
-    Share.share({
-      message: message,
-    })
-      .then(result => {
-        if (result.action === Share.sharedAction) {
-          if (result.activityType) {
-            console.log('Shared via ', result.activityType);
-          } else {
-            console.log('Shared');
-          }
-        } else if (result.action === Share.dismissedAction) {
-          console.log('Dismissed');
-        }
-      })
-      .catch(err => console.error('Failed to share:', err));
-  };
-
   if (!movie || !video) {
     return null;
   }
+
+  const shareMessage = `I found a movie to watch!\n\n"${
+    movie.title
+  }" | ${new Date(movie.release_date).getFullYear()} | ${
+    movie.vote_average
+  }\n\n${movie.overview}`;
 
   return (
     <View style={styles.wrapper}>
       <Header />
       {movie && (
         <MovieDetailsPoster
-          handleShare={handleShare}
+          shareMessage={shareMessage}
           title={movie.title}
           img={movie.backdrop_path || movie.poster_path}
           handleOpenVideo={handleOpenVideo}
